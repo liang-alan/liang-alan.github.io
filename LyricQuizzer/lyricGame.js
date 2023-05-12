@@ -51,7 +51,7 @@ function callAuthorizationApi(body) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "https://accounts.spotify.com/api/token", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.setRequestHeader('Authorization', 'Basic' + btoa(clientId + ":" + clientSecret));
+    xhr.setRequestHeader('Authorization', 'Basic' + btoa(clientID + ":" + clientSecret));
     xhr.send(body);
     xhr.onLoad = handleAuthorizationResponse;
 }
