@@ -1,0 +1,23 @@
+body {
+  background-color: #121212;
+}
+h1, h2, h3, h4, h5, h6  {   /* make headings spotify green */ 
+    font-family : Tahoma;
+    color: #FFFFFF;
+    text-align: center;
+}
+input[type="button"]{
+    font-family : Tahoma;
+    font-size: 18px;
+    background-color: #1DB954;
+    width: 175px;
+    height: 50px;
+}
+.center {
+  margin: 0;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
