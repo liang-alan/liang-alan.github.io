@@ -2,6 +2,7 @@ const CLIENTID = "e0f79a8db48a47a182fb333d07844fcd";
 const clientSecret = "2ce7ee3bc09e4562a2a99a8b957a7653";
 const scopes = ["playlist-read-private", "user-library-read", "user-read-email"]
 var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html";
+var accessToken = "";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize?";
 
@@ -21,6 +22,7 @@ function onLoad() {
     if (window.location.search.length > 0 ) {
         handleRedirect();
     }
+    
 }
 function handleRedirect() {
     let code = getCode();
@@ -36,6 +38,7 @@ function getCode() {
         code = urlParams.get("code");
     }
     return code;
+    document.getElementById(Welcome).innerHTML("Welcome, " + getDisplayName());
 }
 
 function fetchAccessToken(authCode) {
@@ -51,7 +54,7 @@ function fetchAccessToken(authCode) {
     })
         .then(response => response.json())
         .then(data => {
-            const accessToken = data.access_token;
+            accessToken = data.access_token;
             console.log('Access token: ', accessToken);
         })
         .catch(error => console.error(error));
