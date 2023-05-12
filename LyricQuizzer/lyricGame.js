@@ -3,9 +3,6 @@ var clientSecret = "2ce7ee3bc09e4562a2a99a8b957a7653";
 var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
-function pickPlaylist() {
-    console.log("pickPlaylist");
-}
 
 function submitLogin() {
     let url = AUTHORIZE;
@@ -14,6 +11,9 @@ function submitLogin() {
     url += "&redirect_uri=" + encodeURI(redirect_uri);
     url += "&show_dialog=true";
     url += "&scope=playlist-read-private user-library-read user-read-email";
+    console.log("logging in...");
+    localStorage.setItem("clientID", clientID);
+    localStorage.setItem("clientSecret", clientSecret);
     window.location.href = url;
 }
 
@@ -25,6 +25,7 @@ function onLoad() {
 function handleRedirect() {
     let code = getCode();
     fetchAccessToken(code);
+    window.history.pushState("", "", redirect_uri); // remove param from url
 }
 
 function getCode() {
@@ -52,7 +53,7 @@ function callAuthorizationApi(body) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.setRequestHeader('Authorization', 'Basic' + btoa(client_id + ":" + client_secret));
     xhr.send(body);
-    xhr.onLoad = handleAuthorizationResponse();
+    xhr.onLoad = handleAuthorizationResponse;
 }
 
 function handleAuthorizationResponse() {
@@ -73,5 +74,76 @@ function handleAuthorizationResponse() {
         console.log(this.responseText);
         alert(this.responseText);
     }
+}
+
+function getPlaylists() {
+    callApi("GET", "https://api.spotify.com/v1/me/playlists", null, handlePlaylistsResponse);
+}
+
+function getUsername() {
+    callApi("GET", "https://api.spotify.com/v1/me", null, handleUsernameResponse);
+}
+
+function handlePlaylistsResponse() {
+    if (this.status == 200) {
+        console.log(data);
+        var data = JSON.parse(this.responseText);
+        removeAllItems("playlists");
+        data.items.forEach(item => addPlaylist(item));
+    } else if (this.status == 401){
+        refreshAccessToken();
+    } else {
+        console.log(this.responseText);
+        alert(this.responseText);
+    }
+}
+
+function addPlaylist(item) {
+    let node = document.createElement("Option");
+    node.value = item.id;
+    node.innerHTML = item.name + " (" + item.tracks.total + ")";
+    document.getElementById("playlist").appendChild(node);
+}
+
+function handleUsernameResponse() {
+    if (this.status == 200) {
+        console.log(data);
+        var data = JSON.parse(this.responseText);
+        removeAllItems("display_name");
+        data.items.forEach(item => addName(item));
+    } else if (this.status == 401) {
+        refreshAccessToken();
+    } else {
+        console.log(this.responseText);
+        alert(this.responseText);
+    }
+}
+function addName(item) {
+    document.getElementById("Welcome").innerHTML = "Welcome, " + item.name;
+}
+
+function callApi(method, url, body, callback) {
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Authorization', 'Bearer' + access_token);
+    xhr.send(body);
+    xhr.onload = callback;
+}
+
+function removeAllItems(elementID) {
+    let node = document.getElementById(elementID);
+    while (node.firstChild) {
+        node.removeChild(node.firstChild);
+    }
+}
+
+
+function refreshAccessToken() {
+    refresh_token = localStorage.getItem("refresh_token");
+    let body = "grant_type=refresh_token";
+    body += "&refresh_token=" + refresh_token;
+    body += "&client_id=" + clientID;
+    callAuthorizationApi(body);
 }
 

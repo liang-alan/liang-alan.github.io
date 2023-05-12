@@ -4,15 +4,17 @@
 <head>
     <link rel="stylesheet" href="lyricGame.css">
     <meta charset="UTF-8">
-    <title>Lyric Game</title>
+    <title>Lyric Game v1</title>
     <meta name="Author" content="Alan Liang">
 </head>
 <script src="lyricGame.js"></script> 
 <body onload="onLoad()">
-    <p id="welcome">Welcome</p>
+    <p id="Welcome">Welcome</p>
     <input id="login" type="button" value="Login" onclick="submitLogin()">
     <h1>Ready to test your lyrical knowledge?</h1>
-    <input id="startButton" class="center" type="button" value="Pick Playlist" onclick="pickPlaylist()">
+    <input id="startButton" class="center" type="button" value="Load Playlists" onclick="getPlaylist()">
+    <select id="playlist" class="center" style = "top: 25%">
+    </select>
 
 </body>
 
