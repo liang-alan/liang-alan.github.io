@@ -1,4 +1,4 @@
-var redirect_uri = "https://pixelfish123.github.io/LyricGame/lyricGame.html"; // change this your value
+var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html"; // change this your value
 
 
 var client_id = "";
