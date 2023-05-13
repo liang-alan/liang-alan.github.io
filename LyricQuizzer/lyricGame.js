@@ -28,7 +28,7 @@ function handleRedirect() {
     let code = getCode();
     fetchAccessToken(code);
     window.history.pushState("", "", redirect_uri); // remove param from url
-    document.getElementById(Welcome).innerHTML("Welcome, " + getDisplayName());
+    document.getElementById("Welcome").innerHTML("Welcome, " + getDisplayName());
 }
 
 function getCode() {
