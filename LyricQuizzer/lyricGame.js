@@ -1,6 +1,6 @@
 const CLIENTID = "e0f79a8db48a47a182fb333d07844fcd";
 const clientSecret = "2ce7ee3bc09e4562a2a99a8b957a7653";
-const scopes = ["playlist-read-private", "user-library-read", "user-read-email"]
+const scopes = ["playlist-read-private", "user-library-read", "user-read-email", "user-read-private"]
 var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html";
 var accessToken = "";
 
