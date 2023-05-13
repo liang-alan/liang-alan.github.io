@@ -11,7 +11,7 @@ function submitLogin() {
     url += "client_id=" + encodeURIComponent(CLIENTID);
     url += "&response_type=code";
     url += "&redirect_uri=" + encodeURIComponent(redirect_uri);
-    url += "&scope=" + encodeURIComponent(scopes.join(" "));
+    url += "&scope=" + encodeURIComponent(scopes.join("%20"));
     console.log("logging in...");
     localStorage.setItem("CLIENTID", CLIENTID);
     localStorage.setItem("clientSecret", clientSecret);
