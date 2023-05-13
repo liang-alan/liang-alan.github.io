@@ -28,6 +28,7 @@ function handleRedirect() {
     let code = getCode();
     fetchAccessToken(code);
     window.history.pushState("", "", redirect_uri); // remove param from url
+    document.getElementById(Welcome).innerHTML("Welcome, " + getDisplayName());
 }
 
 function getCode() {
@@ -38,7 +39,6 @@ function getCode() {
         code = urlParams.get("code");
     }
     return code;
-    document.getElementById(Welcome).innerHTML("Welcome, " + getDisplayName());
 }
 
 function fetchAccessToken(authCode) {
