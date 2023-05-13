@@ -8,14 +8,18 @@
     <meta name="Author" content="Alan Liang">
 </head>
 <script src="lyricGame.js"></script> 
-<body onload="onLoad()">
-    <p id="Welcome">Welcome</p>
-    <input id="login" type="button" value="Login" onclick="requestAuthorization()">
-    <h1>Ready to test your lyrical knowledge?</h1>
-    <input id="startButton" class="center" type="button" value="Load Playlists" onclick="getPlaylists()">
-    <select id="playlist" class="center" style = "top: 25%">
-    </select>
-
+<body onload="onPageLoad()">
+            <div id="notLogged">
+                <p id="Welcome">Welcome</p>
+                <input id="login" type="button" value="Login" onclick="requestAuthorization()">
+            </div>
+            <div id="logged">
+                <h1>Ready to test your lyrical knowledge?</h1>
+                 <label for="playlists" class="form-label">Playlists</label>
+                    <select id="playlists">
+                    </select>
+                    <input type="button" onclick="refreshPlaylists()" value="Refresh Playlists">
+            </div>
 </body>
 
 </html>
