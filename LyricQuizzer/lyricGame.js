@@ -1,8 +1,8 @@
-var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html"; // change this your value
+var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html"; 
 
 
 var client_id = "";
-var client_secret = ""; // In a real app you should not expose your client_secret to the user
+var client_secret = ""; 
 
 var access_token = null;
 var refresh_token = null;
@@ -198,8 +198,9 @@ function startGame() {
     localStorage.setItem("playlist", document.getElementById('playlists').value);
     console.log("selected playlist:"+ localStorage.getItem("playlist"));
     window.location.href = "game.html";
+    console.log("selected playlist:" + localStorage.getItem("playlist"));
     currentPlaylist = document.getElementById('playlists').value;
-    document.getElementById("currentPlaylist").innerText = currentPlaylist;
+    document.getElementById("currentPlaylist").innerText += currentPlaylist;
 }
 
 function submitGuess() {
