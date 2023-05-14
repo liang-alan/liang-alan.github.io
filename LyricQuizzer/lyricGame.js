@@ -7,7 +7,7 @@ var client_secret = ""; // In a real app you should not expose your client_secre
 var access_token = null;
 var refresh_token = null;
 var currentPlaylist = "";
-var radioButtons = [];
+var tracksInPlaylist = [];
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -39,7 +39,6 @@ function onPageLoad() {
             document.getElementById("logged").style.display = 'block';
         }
     }
-    refreshRadioButtons();
 }
 
 function handleRedirect() {
@@ -161,6 +160,61 @@ function callApi(method, url, body, callback) {
     xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
     xhr.send(body);
     xhr.onload = callback;
+}
+function fetchTracks() {
+    let playlist_id = localStorage.getItem("playlist");
+    if (playlist_id.length > 0) {
+        url = TRACKS.replace("{{PlaylistId}}", playlist_id);
+        callApi("GET", url, null, handleTracksResponse);
+    }
+}
+
+function handleTracksResponse() {
+    if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        console.log(data);
+        tracksInPlaylist.length = 0; // clears the array
+        data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
+    }
+    else if (this.status == 401) {
+        refreshAccessToken()
+    }
+    else {
+        console.log(this.responseText);
+        alert(this.responseText);
+    }
+}
+
+function addTrack(item, index) {
+    let node = document.createElement("option");
+    node.value = index;
+    // node.innerHTML = item.track.name + " (" + item.track.artists[0].name + ")";
+    // document.getElementById("tracks").appendChild(node);
+    console.log(item.track.name + " (" + item.track.artists[0].name + ")"); // TODO: For testing
+    tracksInPlaylist.push(node);
+}
+
+function startGame() {
+    localStorage.setItem("playlist", document.getElementById('playlists').value);
+    console.log("selected playlist:"+ localStorage.getItem("playlist"));
+    window.location.href = "game.html";
+    currentPlaylist = document.getElementById('playlists').value;
+    document.getElementById("currentPlaylist").innerText = currentPlaylist;
+}
+
+function submitGuess() {
+    const stringSimilarity = require('string-similarity');
+
+    var expectedSong = 'hello world';
+    var userSong = document.getElementById('userInput').value;
+
+    var similarity = stringSimilarity.compareTwoStrings(userSong, expectedSong);
+
+    if (similarity > 0.9) {
+        console.log('Correct!');	
+    } else {
+        console.log('Wrong! This song was actually ' + expectedSong);
+    }
 }
 
 
