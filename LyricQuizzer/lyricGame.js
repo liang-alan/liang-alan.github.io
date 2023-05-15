@@ -1,4 +1,3 @@
-import stringSimilarity from '/node_modules/string-similarity/umd/string-similarity.min.js';
 
 var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html"; 
 
@@ -205,17 +204,47 @@ function startGame() {
 }
 
 function submitGuess() {
-    // const stringSimilarity = require('string-similarity'); // I already impported above
 
-    var expectedSong = 'hello world';
+    var expectedSong = 'hello world'; //TODO: Temporary for testing
     var userSong = document.getElementById('userInput').value;
 
-    var similarity = stringSimilarity.compareTwoStrings(userSong, expectedSong);
+    var similarity = checkSimilarity(expectedSong, userSong);
 
-    if (similarity > 0.9) {
+    if (similarity <= 2) { // if user guess is within 2 characters of the actual song
         console.log('Correct!');	
     } else {
         console.log('Wrong! This song was actually ' + expectedSong);
+    }
+}
+
+function checkSimilarity(str1,str2) { // Levenshtein distance algorithm
+    function levenshteinDistance(str1, str2) {
+        const m = str1.length;
+        const n = str2.length;
+
+        // Create a matrix to store the distances
+        const dp = [];
+        for (let i = 0; i <= m; i++) {
+            dp[i] = [];
+            dp[i][0] = i;
+        }
+        for (let j = 0; j <= n; j++) {
+            dp[0][j] = j;
+        }
+
+        // Compute the distances
+        for (let i = 1; i <= m; i++) {
+            for (let j = 1; j <= n; j++) {
+                if (str1[i - 1] === str2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+                }
+            }
+        }
+
+        // Return the Levenshtein distance
+        return dp[m][n];
     }
 }
 
