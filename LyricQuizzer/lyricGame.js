@@ -206,7 +206,7 @@ function startGame() {
 function submitGuess() {
 
     var expectedSong = 'hello world'; //TODO: Temporary for testing
-    var userSong = document.getElementById('userInput').value;
+    var userSong = document.getElementById('guessEntry').value;
 
     var similarity = checkSimilarity(expectedSong, userSong);
 
