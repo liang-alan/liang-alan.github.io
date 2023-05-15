@@ -1,5 +1,6 @@
-var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html"; 
 import stringSimilarity from '/node_modules/string-similarity/umd/string-similarity.min.js';
+
+var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html"; 
 
 var client_id = "";
 var client_secret = ""; 
