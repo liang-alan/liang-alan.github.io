@@ -1,5 +1,5 @@
 var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html"; 
-
+import stringSimilarity from '/node_modules/string-similarity/umd/string-similarity.min.js';
 
 var client_id = "";
 var client_secret = ""; 
@@ -204,7 +204,7 @@ function startGame() {
 }
 
 function submitGuess() {
-    const stringSimilarity = require('string-similarity');
+    // const stringSimilarity = require('string-similarity'); // I already impported above
 
     var expectedSong = 'hello world';
     var userSong = document.getElementById('userInput').value;
