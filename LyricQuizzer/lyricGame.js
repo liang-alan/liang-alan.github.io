@@ -209,7 +209,7 @@ function submitGuess() {
     var userSong = document.getElementById('guessEntry').value;
 
     var similarity = checkSimilarity(expectedSong, userSong);
-    console.log("Comparing your guess" + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
+    console.log("Comparing your guess: " + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
 
     if (similarity <= 2) { // if user guess is within 2 characters of the actual song
         console.log('Correct!');	
@@ -219,7 +219,6 @@ function submitGuess() {
 }
 
 function checkSimilarity(str1,str2) { // Levenshtein distance algorithm
-    function levenshteinDistance(str1, str2) {
         const m = str1.length;
         const n = str2.length;
 
@@ -246,7 +245,6 @@ function checkSimilarity(str1,str2) { // Levenshtein distance algorithm
 
         // Return the Levenshtein distance
         return dp[m][n];
-    }
 }
 
 
