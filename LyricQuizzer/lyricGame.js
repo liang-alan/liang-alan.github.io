@@ -209,6 +209,7 @@ function submitGuess() {
     var userSong = document.getElementById('guessEntry').value;
 
     var similarity = checkSimilarity(expectedSong, userSong);
+    console.log("Comparing your guess" + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
 
     if (similarity <= 2) { // if user guess is within 2 characters of the actual song
         console.log('Correct!');	
