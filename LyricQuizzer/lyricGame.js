@@ -175,6 +175,9 @@ function handleTracksResponse() {
         console.log(data);
         tracksInPlaylist.length = 0; // clears the array
         data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
+
+        
+        data.items.forEach((item, index) => console.log(item.track.name + " (" + item.track.artists[0].name + ")")); // TODO: For testing
     }
     else if (this.status == 401) {
         refreshAccessToken()
@@ -194,13 +197,18 @@ function addTrack(item, index) {
     tracksInPlaylist.push(node);
 }
 
+function backToMenu() {
+    window.location.href = "lyricGame.html";
+}
 function startGame() {
-    localStorage.setItem("playlist", document.getElementById('playlists').value);
-    console.log("selected playlist:"+ localStorage.getItem("playlist"));
+    localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist
     window.location.href = "game.html";
-    console.log("selected playlist:" + localStorage.getItem("playlist"));
     currentPlaylist = document.getElementById('playlists').value;
-    document.getElementById("currentPlaylist").innerText += currentPlaylist;
+}
+
+function loadGame() {
+    document.getElementById("currentPlaylist").innerText += currentPlaylist.name;
+    fetchTracks(); // gets the tracks in the playlist and loads them into the array of tracksInPlaylist
 }
 
 function submitGuess() {
