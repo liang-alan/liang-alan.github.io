@@ -68,7 +68,7 @@ function requestAuthorization() {
     url += "&response_type=code";
     url += "&redirect_uri=" + encodeURI(redirect_uri);
     url += "&show_dialog=true";
-    url += "&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
+    url += "&scope=user-read-private user-read-email user-library-read streaming user-read-playback-state  playlist-read-private";
     window.location.href = url; // Show Spotify's authorization screen
 }
 
@@ -203,10 +203,10 @@ function backToMenu() {
 function startGame() {
     localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist
     window.location.href = "game.html";
-    currentPlaylist = document.getElementById('playlists').value;
 }
 
 function loadGame() {
+    currentPlaylist = localStorage.getItem("playlist");
     document.getElementById("currentPlaylist").innerText += currentPlaylist.name;
     fetchTracks(); // gets the tracks in the playlist and loads them into the array of tracksInPlaylist
 }
