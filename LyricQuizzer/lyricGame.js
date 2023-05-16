@@ -143,6 +143,8 @@ function addPlaylist(item) {
     let node = document.createElement("option");
     node.value = item.id;
     node.innerHTML = item.name + " (" + item.tracks.total + ")";
+    node.dataset.name = item.name;
+    node.dataset.songs = JSON.stringify(item.tracks.items.map(track => track.name));
     document.getElementById("playlists").appendChild(node);
 }
 
@@ -161,53 +163,53 @@ function callApi(method, url, body, callback) {
     xhr.send(body);
     xhr.onload = callback;
 }
-function fetchTracks() {
-    let playlist_id = localStorage.getItem("playlist");
-    if (playlist_id.length > 0) {
-        url = TRACKS.replace("{{PlaylistId}}", playlist_id);
-        callApi("GET", url, null, handleTracksResponse);
-    }
-}
+// function fetchTracks() {
+//     let playlist_id = localStorage.getItem("playlist");
+//     if (playlist_id.length > 0) {
+//         url = TRACKS.replace("{{PlaylistId}}", playlist_id);
+//         callApi("GET", url, null, handleTracksResponse);
+//     }
+// }
 
-function handleTracksResponse() {
-    if (this.status == 200) {
-        var data = JSON.parse(this.responseText);
-        console.log(data);
-        tracksInPlaylist.length = 0; // clears the array
-        data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
+// function handleTracksResponse() {
+//     if (this.status == 200) {
+//         var data = JSON.parse(this.responseText);
+//         console.log(data);
+//         tracksInPlaylist.length = 0; // clears the array
+//         data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
 
         
-        data.items.forEach((item, index) => console.log(item.track.name + " (" + item.track.artists[0].name + ")")); // TODO: For testing
-    }
-    else if (this.status == 401) {
-        refreshAccessToken()
-    }
-    else {
-        console.log(this.responseText);
-        alert(this.responseText);
-    }
-}
+//         data.items.forEach((item, index) => console.log(item.track.name + " (" + item.track.artists[0].name + ")")); // TODO: For testing
+//     }
+//     else if (this.status == 401) {
+//         refreshAccessToken()
+//     }
+//     else {
+//         console.log(this.responseText);
+//         alert(this.responseText);
+//     }
+// }
 
-function addTrack(item, index) {
-    let node = document.createElement("option");
-    node.value = index;
-    // node.innerHTML = item.track.name + " (" + item.track.artists[0].name + ")";
-    // document.getElementById("tracks").appendChild(node);
-    console.log(item.track.name + " (" + item.track.artists[0].name + ")"); // TODO: For testing
-    tracksInPlaylist.push(node);
-}
+// function addTrack(item, index) {
+//     let node = document.createElement("option");
+//     node.value = index;
+//     // node.innerHTML = item.track.name + " (" + item.track.artists[0].name + ")";
+//     // document.getElementById("tracks").appendChild(node);
+//     console.log(item.track.name + " (" + item.track.artists[0].name + ")"); // TODO: For testing
+//     tracksInPlaylist.push(node);
+// }
 
 function backToMenu() {
     window.location.href = "lyricGame.html";
 }
 function startGame() {
-    localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist
+    localStorage.setItem("playlist", document.getElementById('playlists')); //gets the selected playlist
     window.location.href = "game.html";
 }
 
 function loadGame() {
     currentPlaylist = localStorage.getItem("playlist");
-    document.getElementById("currentPlaylist").innerText += currentPlaylist.name;
+    document.getElementById("currentPlaylist").innerText += currentPlaylist.dataset.name;
     fetchTracks(); // gets the tracks in the playlist and loads them into the array of tracksInPlaylist
 }
 
