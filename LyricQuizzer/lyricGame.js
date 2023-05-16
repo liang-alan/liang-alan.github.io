@@ -210,11 +210,9 @@ function startGame() {
 function loadGame() {
     currentPlaylist = localStorage.getItem("playlist");
     document.getElementById("currentPlaylist").innerText += currentPlaylist.dataset.name;
-    fetchTracks(); // gets the tracks in the playlist and loads them into the array of tracksInPlaylist
 }
 
 function submitGuess() {
-
     var expectedSong = 'hello world'; //TODO: Temporary for testing
     var userSong = document.getElementById('guessEntry').value;
 
