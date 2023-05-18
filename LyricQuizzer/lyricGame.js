@@ -128,7 +128,6 @@ function handlePlaylistsResponse() {
         console.log(data);
         removeAllItems("playlists");
         data.items.forEach(item => addPlaylist(item));
-        document.getElementById('playlists').value = currentPlaylist;
     }
     else if (this.status == 401) {
         refreshAccessToken()
@@ -143,7 +142,6 @@ function addPlaylist(item) {
     let node = document.createElement("option");
     node.value = item.id;
     node.innerHTML = item.name + " (" + item.tracks.total + ")";
-    node.dataset.name = item.name;
     document.getElementById("playlists").appendChild(node);
 }
 
@@ -190,25 +188,26 @@ function handleTracksResponse() {
 }
 
 function addTrack(item, index) {
-    let node = document.createElement("option");
-    node.value = index;
+    // let node = item.track.name + " (" + item.track.artists[0].name + ")";
     // node.innerHTML = item.track.name + " (" + item.track.artists[0].name + ")";
     // document.getElementById("tracks").appendChild(node);
     console.log(item.track.name + " (" + item.track.artists[0].name + ")"); // TODO: For testing
-    tracksInPlaylist.push(node);
+    // tracksInPlaylist.push(node);
 }
 
 function backToMenu() {
     window.location.href = "lyricGame.html";
 }
 function startGame() {
-    localStorage.setItem("playlist", document.getElementById('playlists')); //gets the selected playlist
+    localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist
+    var selectedPlaylist = document.getElementById("currentPlaylist");
+    var selectedPlaylistName = selectedPlaylist.options[selectedPlaylist.selectedIndex].textContent;
+    localStorage.setItem("playlistName", selectedPlaylistName); 
     window.location.href = "game.html";
 }
 
 function loadGame() {
-    // currentPlaylist = localStorage.getItem("playlist");
-    // document.getElementById("currentPlaylist").innerText += currentPlaylist.dataset.name;
+    document.getElementById("currentPlaylist").innerText += localStorage.getItem("playlistName");
 }
 
 function submitGuess() {
