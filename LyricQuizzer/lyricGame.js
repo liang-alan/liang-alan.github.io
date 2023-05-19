@@ -200,8 +200,8 @@ function backToMenu() {
 }
 function startGame() {
     localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist
-    var selectedPlaylist = document.getElementById("currentPlaylist");
-    var selectedPlaylistName = selectedPlaylist.options[selectedPlaylist.selectedIndex].textContent;
+    var selectedPlaylist = document.getElementById("playlists");
+    var selectedPlaylistName = selectedPlaylist.options[selectedPlaylist.selectedIndex].text;
     localStorage.setItem("playlistName", selectedPlaylistName); 
     window.location.href = "game.html";
 }
