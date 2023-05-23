@@ -8,6 +8,7 @@ var access_token = null;
 var refresh_token = null;
 var currentPlaylist = "";
 var tracksInPlaylist = [];
+var songName = "";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -174,8 +175,6 @@ function handleTracksResponse() {
         console.log(data);
         tracksInPlaylist.length = 0; // clears the array
         data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
-
-        
         data.items.forEach((item, index) => console.log(item.track.name + " (" + item.track.artists[0].name + ")")); // TODO: For testing
     }
     else if (this.status == 401) {
@@ -192,7 +191,18 @@ function addTrack(item, index) {
     // node.innerHTML = item.track.name + " (" + item.track.artists[0].name + ")";
     // document.getElementById("tracks").appendChild(node);
     console.log(item.track.name + " (" + item.track.artists[0].name + ")"); // TODO: For testing
-    // tracksInPlaylist.push(node);
+    var artistsList = ""
+    for (var i = 0; i < item.tracks.artists.length; i++) {
+        var artist = item.tracks.artists[i];
+        console.log(artist); // FOR TESTING
+        artistsList += artist.name + ", ";
+    }
+    artistsList = artistsList.substring(0, artistsList.length - 2); // removes the last comma
+    var song = {
+        name: item.track.name,
+        artist: artistsList
+    }
+    tracksInPlaylist.push(song);
 }
 
 function backToMenu() {
@@ -207,7 +217,12 @@ function startGame() {
 }
 
 function loadGame() {
-    document.getElementById("currentPlaylist").innerText += localStorage.getItem("playlistName");
+    document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
+    fetchTracks(); // loads tracks into tracksInPlaylist array
+}
+
+function nextSong() {
+    
 }
 
 function submitGuess() {
