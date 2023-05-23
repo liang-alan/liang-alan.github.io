@@ -39,3 +39,8 @@ h1, h2, h3, h4, h5, h6  {   /* make headings spotify green */
 .container {
     margin-top : 10px;
 }
+label {
+    color: #FFFFFF;
+    font-family: Tahoma;
+    font-size: 18px;
+}

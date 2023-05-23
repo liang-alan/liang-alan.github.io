@@ -162,28 +162,26 @@ function callApi(method, url, body, callback) {
     xhr.onload = callback;
 }
 function fetchTracks() {
-    let playlist_id = localStorage.getItem("playlist");
-    if (playlist_id.length > 0) {
-        url = TRACKS.replace("{{PlaylistId}}", playlist_id);
-        callApi("GET", url, null, handleTracksResponse);
-    }
+    url = TRACKS.replace("{{PlaylistId}}", localStorage.getItem("playlist"));
+    callApi("GET", url, null, handleTracksResponse);
 }
 
 function handleTracksResponse() {
-    if (this.status == 200) {
-        var data = JSON.parse(this.responseText);
-        console.log(data);
-        tracksInPlaylist.length = 0; // clears the array
-        data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
-        data.items.forEach((item, index) => console.log(item.track.name + " (" + item.track.artists[0].name + ")")); // TODO: For testing
-    }
-    else if (this.status == 401) {
-        refreshAccessToken()
-    }
-    else {
-        console.log(this.responseText);
-        alert(this.responseText);
-    }
+    console.log("handleTracksResponse functions properly");
+    // if (this.status == 200) {
+    //     var data = JSON.parse(this.responseText);
+    //     console.log(data);
+    //     tracksInPlaylist.length = 0; // clears the array
+    //     data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
+    //     data.items.forEach((item, index) => console.log(item.track.name + " (" + item.track.artists[0].name + ")")); // TODO: For testing
+    // }
+    // else if (this.status == 401) {
+    //     refreshAccessToken()
+    // }
+    // else {
+    //     console.log(this.responseText);
+    //     alert(this.responseText);
+    // }
 }
 
 function addTrack(item, index) {
