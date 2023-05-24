@@ -223,7 +223,7 @@ function loadGame() {
         access_token = localStorage.getItem("access_token");
     }
     document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
-    callApi("GET", localStorage.get("playlist"), null, handleImageResponse);
+    callApi("GET", localStorage.getItem("playlist"), null, handleImageResponse);
     var playlistCover = document.createElement("img");
     playlistCover.src = imageUrl;
     playlistCover.insertBefore(document.getElementById("guessSection"));
