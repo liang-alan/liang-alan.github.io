@@ -9,6 +9,7 @@ var refresh_token = null;
 var currentPlaylist = "";
 var tracksInPlaylist = [];
 var songName = "";
+var imageUrl = "";
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -196,6 +197,7 @@ function addTrack(item, index) {
         name: item.track.name,
         artist: item.track.artists[0].name,
         previewURL: item.track.preview_url // link to a tiny clip of the song
+        
     }
     tracksInPlaylist.push(song);
 }
@@ -204,7 +206,7 @@ function backToMenu() {
     window.location.href = "lyricGame.html";
 }
 function startGame() {
-    localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist
+    localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist stores it into local
     var selectedPlaylist = document.getElementById("playlists");
     var selectedPlaylistName = selectedPlaylist.options[selectedPlaylist.selectedIndex].text;
     localStorage.setItem("playlistName", selectedPlaylistName); 
@@ -221,7 +223,25 @@ function loadGame() {
         access_token = localStorage.getItem("access_token");
     }
     document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
+    callApi("GET", localStorage.get("playlist"), null, handleImageResponse);
+    var playlistCover = document.createElement("img");
+    playlistCover.src = imageUrl;
+    playlistCover.insertBefore(document.getElementById("guessSection"));
     fetchTracks(); // loads tracks into tracksInPlaylist array
+}
+
+function handleImageResponse() {
+    if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        imageUrl = data.images[0].url;
+    }
+    else if (this.status == 401) {
+        refreshAccessToken()
+    }
+    else {
+        console.log(this.responseText);
+        alert(this.responseText);
+    }
 }
 
 function nextSong() {
