@@ -162,7 +162,7 @@ function callApi(method, url, body, callback) {
     xhr.onload = callback; //callback is a function that handles the response from spotify
 }
 function fetchTracks() {
-    let playlist_id = document.getElementById("playlist").value;
+    let playlist_id = localStorage.getItem("playlist");
     if (playlist_id.length > 0) {
         url = TRACKS.replace("{{PlaylistId}}", playlist_id);
         callApi("GET", url, null, handleTracksResponse);
