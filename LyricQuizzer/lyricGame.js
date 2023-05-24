@@ -193,10 +193,12 @@ function addTrack(item, index) {
     // document.getElementById("tracks").appendChild(node);
     console.log(item.track.name + " (" + item.track.artists[0].name + ")"); // TODO: For testing
     var artistsList = ""
-    for (var i = 0; i < item.tracks.artists.length; i++) {
+    var i = 0;
+    while (item.track.artists[i] != null){
         var artistName = item.tracks.artists[i].name;
         console.log(artistName); // FOR TESTING
         artistsList += artist.name + ", ";
+        i++;
     }
     artistsList = artistsList.substring(0, artistsList.length - 2); // removes the last comma
     var song = {
