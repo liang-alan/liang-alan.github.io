@@ -219,7 +219,22 @@ function startGame() {
 }
 
 function loadGame() {
-    requestAuthorization();
+    client_id = localStorage.getItem("client_id");
+    client_secret = localStorage.getItem("client_secret");
+    if (window.location.search.length > 0) {
+        handleRedirect();
+    }
+    else {
+        access_token = localStorage.getItem("access_token");
+        if (access_token == null) {
+            // we don't have an access token so present token section
+            document.getElementById("notLogged").style.display = 'block';
+        }
+        else {
+            // we have an access token so present device section
+            document.getElementById("logged").style.display = 'block';
+        }
+    }
     document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
     fetchTracks(); // loads tracks into tracksInPlaylist array
 }
