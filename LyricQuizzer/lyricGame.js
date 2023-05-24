@@ -26,7 +26,7 @@ const SHUFFLE = "https://api.spotify.com/v1/me/player/shuffle";
 function onPageLoad() {
     client_id = localStorage.getItem("client_id");
     client_secret = localStorage.getItem("client_secret");
-    if (window.location.search.length > 0) {
+    if (window.location.search.length > 0) { //window.location.search.length gets the length of the query string
         handleRedirect();
     }
     else {
@@ -226,14 +226,6 @@ function loadGame() {
     }
     else {
         access_token = localStorage.getItem("access_token");
-        if (access_token == null) {
-            // we don't have an access token so present token section
-            document.getElementById("notLogged").style.display = 'block';
-        }
-        else {
-            // we have an access token so present device section
-            document.getElementById("logged").style.display = 'block';
-        }
     }
     document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
     fetchTracks(); // loads tracks into tracksInPlaylist array
