@@ -159,11 +159,14 @@ function callApi(method, url, body, callback) {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
     xhr.send(body);
-    xhr.onload = callback;
+    xhr.onload = callback; //callback is a function that handles the response from spotify
 }
 function fetchTracks() {
-    url = TRACKS.replace("{{PlaylistId}}", localStorage.getItem("playlist"));
-    callApi("GET", url, null, handleTracksResponse);
+    let playlist_id = document.getElementById("playlist").value;
+    if (playlist_id.length > 0) {
+        url = TRACKS.replace("{{PlaylistId}}", playlist_id);
+        callApi("GET", url, null, handleTracksResponse);
+    }
 }
 
 function handleTracksResponse() {
