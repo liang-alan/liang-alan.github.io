@@ -194,7 +194,7 @@ function addTrack(item, index) {
     console.log(item.track.name + " (" + item.track.artists[0].name + ")"); // TODO: For testing
     var artistsList = ""
     var i = 0;
-    while (item.track.artists[i] != null){
+    while (item.track.artists[i] !== null){
         var artistName = item.tracks.artists[i].name;
         console.log(artistName); // FOR TESTING
         artistsList += artist.name + ", ";
