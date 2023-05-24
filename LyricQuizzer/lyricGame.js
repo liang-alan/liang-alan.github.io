@@ -192,18 +192,9 @@ function addTrack(item, index) {
     // node.innerHTML = item.track.name + " (" + item.track.artists[0].name + ")";
     // document.getElementById("tracks").appendChild(node);
     console.log(item.track.name + " (" + item.track.artists[0].name + ")"); // TODO: For testing
-    var artistsList = ""
-    var i = 0;
-    while (item.track.artists[i] !== null){
-        var artist = item.tracks.artists[i];
-        console.log(artist.name); // FOR TESTING
-        artistsList += artist.name + ", ";
-        i++;
-    }
-    artistsList = artistsList.substring(0, artistsList.length - 2); // removes the last comma
     var song = {
         name: item.track.name,
-        artist: artistsList,
+        artist: item.track.artists[0].name,
         previewURL: item.track.preview_url // link to a tiny clip of the song
     }
     tracksInPlaylist.push(song);
