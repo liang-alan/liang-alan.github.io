@@ -171,20 +171,20 @@ function fetchTracks() {
 
 function handleTracksResponse() {
     console.log("handleTracksResponse functions properly");
-    // if (this.status == 200) {
-    //     var data = JSON.parse(this.responseText);
-    //     console.log(data);
-    //     tracksInPlaylist.length = 0; // clears the array
-    //     data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
-    //     data.items.forEach((item, index) => console.log(item.track.name + " (" + item.track.artists[0].name + ")")); // TODO: For testing
-    // }
-    // else if (this.status == 401) {
-    //     refreshAccessToken()
-    // }
-    // else {
-    //     console.log(this.responseText);
-    //     alert(this.responseText);
-    // }
+    if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        console.log(data);
+        tracksInPlaylist.length = 0; // clears the array
+        data.items.forEach((item, index) => addTrack(item, index)); // adds each track to the array
+        data.items.forEach((item, index) => console.log(item.track.name + " (" + item.track.artists[0].name + ")")); // TODO: For testing
+    }
+    else if (this.status == 401) {
+        refreshAccessToken()
+    }
+    else {
+        console.log(this.responseText);
+        alert(this.responseText);
+    }
 }
 
 function addTrack(item, index) {
@@ -201,7 +201,8 @@ function addTrack(item, index) {
     artistsList = artistsList.substring(0, artistsList.length - 2); // removes the last comma
     var song = {
         name: item.track.name,
-        artist: artistsList
+        artist: artistsList,
+        previewURL: item.track.preview_url // link to a tiny clip of the song
     }
     tracksInPlaylist.push(song);
 }
@@ -210,6 +211,7 @@ function backToMenu() {
     window.location.href = "lyricGame.html";
 }
 function startGame() {
+    requestAuthorization();
     localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist
     var selectedPlaylist = document.getElementById("playlists");
     var selectedPlaylistName = selectedPlaylist.options[selectedPlaylist.selectedIndex].text;
