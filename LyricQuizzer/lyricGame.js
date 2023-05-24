@@ -211,7 +211,6 @@ function backToMenu() {
     window.location.href = "lyricGame.html";
 }
 function startGame() {
-    requestAuthorization();
     localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist
     var selectedPlaylist = document.getElementById("playlists");
     var selectedPlaylistName = selectedPlaylist.options[selectedPlaylist.selectedIndex].text;
@@ -220,6 +219,7 @@ function startGame() {
 }
 
 function loadGame() {
+    requestAuthorization();
     document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
     fetchTracks(); // loads tracks into tracksInPlaylist array
 }
