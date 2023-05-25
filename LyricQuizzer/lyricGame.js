@@ -250,8 +250,10 @@ function nextSong() {
 }
 
 function playSong(index) {
+    console.log("playSong function has been called");
+    console.log("Currently playing" + tracksInPlaylist[index].name + " by " + tracksInPlaylist[index].artist);
     audioPlayer = new Audio(tracksInPlaylist[index].previewURL);
-    audio.play();
+    audioPlayer.play();
 }
 
 function submitGuess() {
