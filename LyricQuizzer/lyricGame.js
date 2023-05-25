@@ -271,7 +271,7 @@ function submitGuess() {
     document.getElementById("guessEntry").value = ""; //clears the text field after guess is submitted
     audioPlayer.pause();
     var expectedSong = songName; //TODO: Temporary for testing
-    expectedSong = string.match(/^[^(]+/);
+    expectedSong = expectedSong.match(/^[^(]+/);
     var userSong = document.getElementById('guessEntry').value;
 
     var similarity = checkSimilarity(expectedSong, userSong);
