@@ -10,6 +10,7 @@ var currentPlaylist = "";
 var tracksInPlaylist = [];
 var songName = "";
 var imageUrl = "";
+var audioPlayer = null;
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -196,8 +197,7 @@ function addTrack(item, index) {
     var song = {
         name: item.track.name,
         artist: item.track.artists[0].name,
-        previewURL: item.track.preview_url // link to a tiny clip of the song
-        
+        previewURL: item.track.preview_url // link to a tiny clip of the song  
     }
     tracksInPlaylist.push(song);
 }
@@ -223,11 +223,8 @@ function loadGame() {
         access_token = localStorage.getItem("access_token");
     }
     document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
-    callApi("GET", localStorage.getItem("playlist"), null, handleImageResponse);
-    var playlistCover = document.createElement("img");
-    playlistCover.src = imageUrl;
-    playlistCover.insertBefore(document.getElementById("guessSection"));
     fetchTracks(); // loads tracks into tracksInPlaylist array
+    nextSong();
 }
 
 function handleImageResponse() {
@@ -245,21 +242,33 @@ function handleImageResponse() {
 }
 
 function nextSong() {
-    
+    var randomIndex = Math.floor(Math.random() * tracksInPlaylist.length);
+    songName = tracksInPlaylist[randomIndex].name;
+    playSong(randomIndex);
+
+}
+
+function playSong(index) {
+    audioPlayer = new Audio(tracksInPlaylist[index].previewURL);
+    audio.play();
 }
 
 function submitGuess() {
-    var expectedSong = 'hello world'; //TODO: Temporary for testing
+    var expectedSong = songName; //TODO: Temporary for testing
     var userSong = document.getElementById('guessEntry').value;
 
     var similarity = checkSimilarity(expectedSong, userSong);
     console.log("Comparing your guess: " + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
 
     if (similarity <= 2) { // if user guess is within 2 characters of the actual song
+        document.getElementById('guessResult').innerText = "Correct! This song was " + expectedSong;
         console.log('Correct!');	
     } else {
+        audioPlayer.pause();
+        document.getElementById('guessResult').innerText = "This song was actually" + expectedSong;
         console.log('Wrong! This song was actually ' + expectedSong);
     }
+
 }
 
 function checkSimilarity(str1,str2) { // Levenshtein distance algorithm
