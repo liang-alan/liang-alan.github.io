@@ -16,15 +16,9 @@ var score = 0;
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
 const PLAYLISTS = "https://api.spotify.com/v1/me/playlists";
-const DEVICES = "https://api.spotify.com/v1/me/player/devices";
-const PLAY = "https://api.spotify.com/v1/me/player/play";
-const PAUSE = "https://api.spotify.com/v1/me/player/pause";
-const NEXT = "https://api.spotify.com/v1/me/player/next";
-const PREVIOUS = "https://api.spotify.com/v1/me/player/previous";
-const PLAYER = "https://api.spotify.com/v1/me/player";
 const TRACKS = "https://api.spotify.com/v1/playlists/{{PlaylistId}}/tracks";
-const CURRENTLYPLAYING = "https://api.spotify.com/v1/me/player/currently-playing";
-const SHUFFLE = "https://api.spotify.com/v1/me/player/shuffle";
+const ME = "https://api.spotify.com/v1/me";
+
 
 function onPageLoad() {
     client_id = localStorage.getItem("client_id");
@@ -49,6 +43,7 @@ function handleRedirect() {
     let code = getCode();
     fetchAccessToken(code);
     window.history.pushState("", "", redirect_uri); // remove param from url
+    callApi("GET", ME, null, handleMeResponse);
 }
 
 function getCode() {
@@ -132,6 +127,21 @@ function handlePlaylistsResponse() {
         console.log(data);
         removeAllItems("playlists");
         data.items.forEach(item => addPlaylist(item));
+    }
+    else if (this.status == 401) {
+        refreshAccessToken()
+    }
+    else {
+        console.log(this.responseText);
+        alert(this.responseText);
+    }
+}
+
+function handleMeResponse() {
+    if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        console.log(data);
+        document.getElementById("Welcome").innerHTML = "Welcome, " + data.display_name;
     }
     else if (this.status == 401) {
         refreshAccessToken()
@@ -252,14 +262,16 @@ function nextSong() {
 
 function playSong(index) {
     console.log("playSong function has been called");
-    console.log("Currently playing" + tracksInPlaylist[index].name + " by " + tracksInPlaylist[index].artist);
+    // console.log("Currently playing" + tracksInPlaylist[index].name + " by " + tracksInPlaylist[index].artist);
     audioPlayer = new Audio(tracksInPlaylist[index].previewURL);
     audioPlayer.play();
 }
 
 function submitGuess() {
+    document.getElementById("guessEntry").value = ""; //clears the text field after guess is submitted
     audioPlayer.pause();
     var expectedSong = songName; //TODO: Temporary for testing
+    expectedSong = string.match(/^[^(]+/);
     var userSong = document.getElementById('guessEntry').value;
 
     var similarity = checkSimilarity(expectedSong, userSong);
@@ -271,7 +283,7 @@ function submitGuess() {
         updateScore(true);
     } else {
         audioPlayer.pause();
-        document.getElementById('guessResult').innerText = "This song was actually" + expectedSong;
+        document.getElementById('guessResult').innerText = "Nope! This song was actually " + expectedSong;
         console.log('Wrong! This song was actually ' + expectedSong);
         updateScore(false);
     }
@@ -279,11 +291,11 @@ function submitGuess() {
 function updateScore(correct) {
     if (correct) {
         score++;
-        document.getElementById('score').innerText = "Score: " + score;
+        document.getElementById('scoreText').innerText = "Score: " + score;
     }
     else {
         score--;
-        document.getElementById('score').innerText = "Score: " + score;
+        document.getElementById('scoreText').innerText = "Score: " + score;
     }
 }
 
