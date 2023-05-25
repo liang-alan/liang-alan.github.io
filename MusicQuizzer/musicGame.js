@@ -225,8 +225,8 @@ function loadGame() {
     var userGuess = document.getElementById("guessEntry");
     var buttonPressed = false; // helps prevent user from holding down key
     userGuess.addEventListener("keydown", function (event) {
-        console.log("Enter key pressed and registered");
         if (!buttonPressed && event.key === 'Enter') { // if button hasn't been pressed yet
+            console.log("Enter key pressed and registered");
             buttonPressed = true;
             event.preventDefault();
             document.getElementById("guessButton").click();
@@ -293,8 +293,8 @@ function submitGuess() {
         updateScore(false);
     }
     setTimeout(function () {
-        nextSong(); //give the reader 3 seconds to read the result before moving on to the next song
-    }, 3000);
+        nextSong(); //give the reader 1.5 seconds to read the result before moving on to the next song
+    }, 1500);
 }
 function updateScore(correct) {
     if (correct) {
