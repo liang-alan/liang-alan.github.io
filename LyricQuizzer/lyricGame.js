@@ -282,16 +282,18 @@ function submitGuess() {
 
     if (similarity < 3) { // if user guess is mostly right
         
-        document.getElementById('guessResult').innerText = "Correct! This song was " + songName + " by " + artistName;
+        document.getElementById('guessResult').innerText = "Correct! The last song was " + songName + " by " + artistName;
         console.log('Correct!');	
         updateScore(true);
     } else {
 
-        document.getElementById('guessResult').innerText = "Nope! This song was actually " + songName + " by " + artistName;
+        document.getElementById('guessResult').innerText = "Nope! The last song was actually " + songName + " by " + artistName;
         console.log('Wrong! This song was actually ' + expectedSong);
         updateScore(false);
     }
-
+    setTimeout(function () {
+        nextSong(); //give the reader 2 seconds to read the result before moving on to the next song
+    }, 2000);
 }
 function updateScore(correct) {
     if (correct) {
