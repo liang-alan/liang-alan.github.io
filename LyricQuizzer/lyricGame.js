@@ -9,6 +9,7 @@ var refresh_token = null;
 var currentPlaylist = "";
 var tracksInPlaylist = [];
 var songName = "";
+var artistName = "";
 var imageUrl = "";
 var audioPlayer = null;
 var score = 0;
@@ -257,6 +258,7 @@ function nextSong() {
     console.log("nextSong button has been clicked")
     var randomIndex = Math.floor(Math.random() * tracksInPlaylist.length);
     songName = tracksInPlaylist[randomIndex].name;
+    artistName = tracksInPlaylist[randomIndex].artist;
     playSong(randomIndex);
 
 }
@@ -275,19 +277,19 @@ function submitGuess() {
     console.log("Comparing your guess: " + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
 
     var similarity = checkSimilarity(expectedSong.toLowerCase(), userSong.toLowerCase());
+    document.getElementById("guessEntry").value = ""; //clears the text field after guess is submitted and everthing is done
 
     if (similarity < 2) { // if user guess is mostly right
         
-        document.getElementById('guessResult').innerText = "Correct! This song was " + songName;
+        document.getElementById('guessResult').innerText = "Correct! This song was " + songName + "by " + artistName;
         console.log('Correct!');	
         updateScore(true);
     } else {
 
-        document.getElementById('guessResult').innerText = "Nope! This song was actually " + songName;
+        document.getElementById('guessResult').innerText = "Nope! This song was actually " + songName + "by " + artistName;
         console.log('Wrong! This song was actually ' + expectedSong);
         updateScore(false);
     }
-    document.getElementById("guessEntry").value = ""; //clears the text field after guess is submitted and everthing is done
 
 }
 function updateScore(correct) {
