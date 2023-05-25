@@ -206,7 +206,7 @@ function backToMenu() {
     window.location.href = "lyricGame.html";
 }
 function startGame() {
-    localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist stores it into local
+    localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist stores it into localopyp
     var selectedPlaylist = document.getElementById("playlists");
     var selectedPlaylistName = selectedPlaylist.options[selectedPlaylist.selectedIndex].text;
     localStorage.setItem("playlistName", selectedPlaylistName); 
@@ -224,7 +224,7 @@ function loadGame() {
     }
     document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
     fetchTracks(); // loads tracks into tracksInPlaylist array
-    nextSong();
+    
 }
 
 function handleImageResponse() {
@@ -242,6 +242,7 @@ function handleImageResponse() {
 }
 
 function nextSong() {
+    console.log("nextSong button has been clicked")
     var randomIndex = Math.floor(Math.random() * tracksInPlaylist.length);
     songName = tracksInPlaylist[randomIndex].name;
     playSong(randomIndex);
