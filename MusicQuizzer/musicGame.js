@@ -287,7 +287,6 @@ function submitGuess() {
     document.getElementById("guessEntry").value = ""; //clears the text field after guess is submitted and everthing is done
 
     if (similarity < 3) { // if user guess is mostly right
-        createConfetti();
         document.getElementById('guessResult').innerHTML = "Correct! The song was " + songName + " by " + artistName;
         console.log('Correct!');	
         updateScore(true);
