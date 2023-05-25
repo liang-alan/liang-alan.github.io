@@ -276,7 +276,7 @@ function submitGuess() {
 
     var similarity = checkSimilarity(expectedSong.toLowerCase(), userSong.toLowerCase());
 
-    if (similarity/expectedSong.length >= 0.8) { // if user guess is 80% correct
+    if (similarity < 2) { // if user guess is mostly right
         
         document.getElementById('guessResult').innerText = "Correct! This song was " + songName;
         console.log('Correct!');	
