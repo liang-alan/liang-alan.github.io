@@ -255,7 +255,9 @@ function handleImageResponse() {
 }
 
 function nextSong() {
-    document.getElementById("nextSong").value = "Next Song";
+    if (document.getElementById("nextSong") !== null) {
+        document.getElementById("nextSong").remove();
+    }
     if (audioPlayer != null) {
         audioPlayer.pause();
     }
