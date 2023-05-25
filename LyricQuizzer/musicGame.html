@@ -2,19 +2,20 @@
 <html lang="en">
     
 <head>
-    <link rel="stylesheet" href="lyricGame.css">
+    <link rel="stylesheet" href="musicGame.css">
+    <link rel="icon" href="images/musicGame.png" type="image/x-icon">
     <meta charset="UTF-8">
-    <title>Lyric Game</title>
+    <title>Music Game</title>
     <meta name="Author" content="Alan Liang">
 </head>
-<script src="lyricGame.js"></script> 
+<script src="musicGame.js"></script> 
 <body onload="onPageLoad()">
             <div id="notLogged">
                 <p id="Welcome">Welcome!</p>
                 <input id="login" type="button" value="Login" onclick="requestAuthorization()">
             </div>
             <div id="logged">
-                <h1>Ready to test your lyrical knowledge?</h1>
+                <h1>Ready to test your musical knowledge?</h1>
                  <label for="playlists" class="form-label">Playlists</label>
                     <select id="playlists" style = "height : 24px">
                     </select>

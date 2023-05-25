@@ -2,21 +2,22 @@
 <html lang="en">
     
 <head>
-    <link rel="stylesheet" href="lyricGame.css">
+    <link rel="stylesheet" href="musicGame.css">
+    <link rel="icon" href="images/musicGame.png" type="image/x-icon">
     <meta charset="UTF-8">
-    <title>Lyric Game</title>
+    <title>Music Game</title>
     <meta name="Author" content="Alan Liang">
 </head>
-<script src="lyricGame.js"></script> 
+<script src="musicGame.js"></script> 
 <body onload = "loadGame()">
         <h1 id="currentPlaylist"> Current Playlist: </h1> 
         <div id = "guessSection">
-            <label for="guessEntry" class="form-label">Guess</label>
+            <label for="guessEntry" class="form-label">Guess: </label>
             <input type="text" id="guessEntry" placeholder="Enter Song Name:"> 
-            <input type="button" onclick="submitGuess()" value="Submit Guess"> 
+            <input type="button" onclick="submitGuess()" value="Submit Guess" style="margin-left: 4px"> 
+            <input type="button" onclick="nextSong()" value="Next Song" style="margin-left: 2px">
         </div>
-        <input type="button" class="topLeft" onclick="backToMenu()" value="Back">
-        <input type="button" onclick="nextSong()" value="Next Song">
+        <input type="button" id="backButton" onclick="backToMenu()" value="Back">
         <p id="guessResult"></p>
         <p id="scoreText">Score: 0</p> 
 

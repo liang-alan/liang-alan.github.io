@@ -1,7 +1,7 @@
 body {
   background-color: #121212;
 }
-h1, h2, h3, h4, h5, h6  {   /* make headings spotify green */ 
+h1, h2, h3, h4, h5, h6  {   
     font-family : Tahoma;
     color: #FFFFFF;
     text-align: center;
@@ -53,12 +53,15 @@ label {
     color: #FFFFFF;
     font-family: Tahoma;
     font-size: 18px;
-    margin-top: 10px;
-    margin-right: 10px;
-    position:absolute;
+    top: -5px;
+    right: 10px;
+    position: fixed;
 }
-.topLeft {
-    position:absolute;
-    top:10;
-    left:10;
+#backButton {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+}
+#guessEntry {
+    height: 20px;
 }
