@@ -1,5 +1,5 @@
 
-var redirect_uri = "https://pixelfish123.github.io/LyricQuizzer/lyricGame.html"; 
+var redirect_uri = "https://pixelfish123.github.io/MusicQuizzer/musicGame.html"; 
 
 var client_id = "";
 var client_secret = ""; 
