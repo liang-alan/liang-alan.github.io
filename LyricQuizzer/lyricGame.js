@@ -261,7 +261,6 @@ function playSong(index) {
 }
 
 function submitGuess() {
-    document.getElementById("guessEntry").value = ""; //clears the text field after guess is submitted
     var expectedSong = songName; //songName is the full name of the song
     expectedSong = expectedSong.match(/^[^(]+/); // truncates extra info such as (ft. artist) or (extended version)
     var userSong = document.getElementById('guessEntry').value;
@@ -279,6 +278,8 @@ function submitGuess() {
         console.log('Wrong! This song was actually ' + expectedSong);
         updateScore(false);
     }
+    document.getElementById("guessEntry").value = ""; //clears the text field after guess is submitted and everthing is done
+
 }
 function updateScore(correct) {
     if (correct) {
