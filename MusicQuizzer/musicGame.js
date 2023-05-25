@@ -201,7 +201,7 @@ function addTrack(item, index) {
 }
 
 function backToMenu() {
-    window.location.href = "lyricGame.html";
+    window.location.href = "musicGame.html";
 }
 function startGame() {
     localStorage.setItem("playlist", document.getElementById('playlists').value); //gets the selected playlist stores it into localopyp
