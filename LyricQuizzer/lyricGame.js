@@ -245,7 +245,9 @@ function handleImageResponse() {
 }
 
 function nextSong() {
-    audioPlayer.pause();
+    if (audioPlayer != null) {
+        audioPlayer.pause();
+    }
     console.log("nextSong button has been clicked")
     var randomIndex = Math.floor(Math.random() * tracksInPlaylist.length);
     songName = tracksInPlaylist[randomIndex].name;
@@ -269,11 +271,12 @@ function submitGuess() {
     console.log("Comparing your guess: " + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
 
     if (similarity <= 2) { // if user guess is within 2 characters of the actual song
+        
         document.getElementById('guessResult').innerText = "Correct! This song was " + songName;
         console.log('Correct!');	
         updateScore(true);
     } else {
-        audioPlayer.pause();
+
         document.getElementById('guessResult').innerText = "Nope! This song was actually " + songName;
         console.log('Wrong! This song was actually ' + expectedSong);
         updateScore(false);
