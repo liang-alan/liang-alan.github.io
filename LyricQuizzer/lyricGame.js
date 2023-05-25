@@ -11,6 +11,7 @@ var tracksInPlaylist = [];
 var songName = "";
 var imageUrl = "";
 var audioPlayer = null;
+var score = 0;
 
 const AUTHORIZE = "https://accounts.spotify.com/authorize"
 const TOKEN = "https://accounts.spotify.com/api/token";
@@ -257,6 +258,7 @@ function playSong(index) {
 }
 
 function submitGuess() {
+    audioPlayer.pause();
     var expectedSong = songName; //TODO: Temporary for testing
     var userSong = document.getElementById('guessEntry').value;
 
@@ -266,12 +268,23 @@ function submitGuess() {
     if (similarity <= 2) { // if user guess is within 2 characters of the actual song
         document.getElementById('guessResult').innerText = "Correct! This song was " + expectedSong;
         console.log('Correct!');	
+        updateScore(true);
     } else {
         audioPlayer.pause();
         document.getElementById('guessResult').innerText = "This song was actually" + expectedSong;
         console.log('Wrong! This song was actually ' + expectedSong);
+        updateScore(false);
     }
-
+}
+function updateScore(correct) {
+    if (correct) {
+        score++;
+        document.getElementById('score').innerText = "Score: " + score;
+    }
+    else {
+        score--;
+        document.getElementById('score').innerText = "Score: " + score;
+    }
 }
 
 function checkSimilarity(str1,str2) { // Levenshtein distance algorithm
