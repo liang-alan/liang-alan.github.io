@@ -44,6 +44,7 @@ function handleRedirect() {
     let code = getCode();
     fetchAccessToken(code);
     window.history.pushState("", "", redirect_uri); // remove param from url
+    refreshPlaylists();
 }
 
 function getCode() {
