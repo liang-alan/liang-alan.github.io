@@ -221,11 +221,17 @@ function loadGame() {
     document.getElementById("currentPlaylist").innerText += " " + localStorage.getItem("playlistName");
     fetchTracks(); // loads tracks into tracksInPlaylist array
     var userGuess = document.getElementById("guessEntry");
-    userGuess.addEventListener("keyup", function (event) {
-        if (event.key === 13) {
+    var buttonPressed = false; // helps prevent user from holding down key
+    userGuess.addEventListener("keydown", function (event) {
+        console.log("Enter key pressed and registered");
+        if (!buttonPressed && event.key === 13) { // if button hasn't been pressed yet
+            buttonPressed = true;
             event.preventDefault();
             document.getElementById("guessButton").click();
         }
+    });
+    userGuess.addEventListener("keyup", function (event) {
+        buttonPressed = false;
     });
     
 }
@@ -264,11 +270,11 @@ function playSong(index) {
 
 function submitGuess() {
     var expectedSong = songName; //songName is the full name of the song
-    expectedSong = expectedSong.match(/^[^(]+/); // truncates extra info such as (ft. artist) or (extended version)
+    expectedSong = expectedSong.replace(/\(.*/, ""); // truncates extra info such as (ft. artist) or (extended version)
     var userSong = document.getElementById('guessEntry').value;
-
-    var similarity = checkSimilarity(expectedSong.toLowerCase, userSong.toLowerCase);
     console.log("Comparing your guess: " + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
+
+    var similarity = checkSimilarity(expectedSong.toLowerCase(), userSong.toLowerCase());
 
     if (similarity/expectedSong.length >= 0.8) { // if user guess is 80% correct
         
