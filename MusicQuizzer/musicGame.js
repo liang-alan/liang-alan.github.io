@@ -288,12 +288,12 @@ function submitGuess() {
 
     if (similarity < 3) { // if user guess is mostly right
         createConfetti();
-        document.getElementById('guessResult').innerText = "Correct! The song was <b>" + songName + "</b> by " + artistName;
+        document.getElementById('guessResult').innerHTML = "Correct! The song was <b>${songName}</b> by ${artistName}";
         console.log('Correct!');	
         updateScore(true);
     } else {
 
-        document.getElementById('guessResult').innerText = "Nope! The song was actually <b>" + songName + "</b> by " + artistName;
+        document.getElementById('guessResult').innerText = "Incorrect! The song was actually <b>${songName}</b> by ${artistName}";
         console.log('Wrong! This song was actually ' + expectedSong);
         updateScore(false);
     }
@@ -340,21 +340,6 @@ function checkSimilarity(str1,str2) { // Levenshtein distance algorithm
         // Return the Levenshtein distance
         return dp[m][n];
 }
-/**
- * for fun lol
- */
-function createConfetti() {
-    var confettiContainer = document.getElementById("confetti-container");
 
-    // Generate confetti
-    var confettiCount = 100; // Number of confetti pieces
-    for (var i = 0; i < confettiCount; i++) {
-        var confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.style.left = Math.random() * 100 + "%";
-        confetti.style.animationDelay = Math.random() * 3 + "s";
-        confettiContainer.appendChild(confetti);
-    }
-}
 
 
