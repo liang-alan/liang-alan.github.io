@@ -267,10 +267,10 @@ function submitGuess() {
     expectedSong = expectedSong.match(/^[^(]+/); // truncates extra info such as (ft. artist) or (extended version)
     var userSong = document.getElementById('guessEntry').value;
 
-    var similarity = checkSimilarity(expectedSong, userSong);
+    var similarity = checkSimilarity(expectedSong.toLowerCase, userSong.toLowerCase);
     console.log("Comparing your guess: " + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
 
-    if (similarity <= 2) { // if user guess is within 2 characters of the actual song
+    if (similarity/expectedSong.length >= 0.8) { // if user guess is 80% correct
         
         document.getElementById('guessResult').innerText = "Correct! This song was " + songName;
         console.log('Correct!');	
