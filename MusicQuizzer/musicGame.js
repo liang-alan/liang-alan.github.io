@@ -288,12 +288,12 @@ function submitGuess() {
 
     if (similarity < 3) { // if user guess is mostly right
         createConfetti();
-        document.getElementById('guessResult').innerHTML = "Correct! The song was <b>${songName}</b> by ${artistName}";
+        document.getElementById('guessResult').innerHTML = "Correct! The song was " + songName + " by " + artistName;
         console.log('Correct!');	
         updateScore(true);
     } else {
 
-        document.getElementById('guessResult').innerText = "Incorrect! The song was actually <b>${songName}</b> by ${artistName}";
+        document.getElementById('guessResult').innerText = "Incorrect! The song was actually " + songName + " by " + artistName;
         console.log('Wrong! This song was actually ' + expectedSong);
         updateScore(false);
     }
