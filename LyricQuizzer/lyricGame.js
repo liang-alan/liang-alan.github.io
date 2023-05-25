@@ -226,7 +226,7 @@ function loadGame() {
             event.preventDefault();
             document.getElementById("guessButton").click();
         }
-    }
+    });
     
 }
 
