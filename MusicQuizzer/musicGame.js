@@ -44,7 +44,9 @@ function handleRedirect() {
     let code = getCode();
     fetchAccessToken(code);
     window.history.pushState("", "", redirect_uri); // remove param from url
-    refreshPlaylists();
+    setTimeout(function () {
+        refreshPlaylists();
+    }, 3000); // wait 3 seconds for access token to load'
 }
 
 function getCode() {
