@@ -223,17 +223,17 @@ function loadGame() {
     fetchTracks(); // loads tracks into tracksInPlaylist array
     var userGuess = document.getElementById("guessEntry");
     var buttonPressed = false; // helps prevent user from holding down key
-    userGuess.addEventListener("keydown", function (event) {
-        console.log("Enter key pressed and registered");
-        if (!buttonPressed && event.key === 13) { // if button hasn't been pressed yet
-            buttonPressed = true;
-            event.preventDefault();
-            document.getElementById("guessButton").click();
-        }
-    });
-    userGuess.addEventListener("keyup", function (event) {
-        buttonPressed = false;
-    });
+    // userGuess.addEventListener("keydown", function (event) {
+    //     console.log("Enter key pressed and registered");
+    //     if (!buttonPressed && event.key === 13) { // if button hasn't been pressed yet
+    //         buttonPressed = true;
+    //         event.preventDefault();
+    //         document.getElementById("guessButton").click();
+    //     }
+    // });
+    // userGuess.addEventListener("keyup", function (event) {
+    //     buttonPressed = false;
+    // });
     
 }
 
@@ -282,12 +282,12 @@ function submitGuess() {
 
     if (similarity < 3) { // if user guess is mostly right
         
-        document.getElementById('guessResult').innerText = "Correct! This song was " + songName + "by " + artistName;
+        document.getElementById('guessResult').innerText = "Correct! This song was " + songName + " by " + artistName;
         console.log('Correct!');	
         updateScore(true);
     } else {
 
-        document.getElementById('guessResult').innerText = "Nope! This song was actually " + songName + "by " + artistName;
+        document.getElementById('guessResult').innerText = "Nope! This song was actually " + songName + " by " + artistName;
         console.log('Wrong! This song was actually ' + expectedSong);
         updateScore(false);
     }
