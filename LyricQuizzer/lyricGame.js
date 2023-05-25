@@ -272,14 +272,15 @@ function playSong(index) {
 
 function submitGuess() {
     var expectedSong = songName; //songName is the full name of the song
-    expectedSong = expectedSong.replace(/\(.*/, ""); // truncates extra info such as (ft. artist) or (extended version)
+    expectedSong = expectedSong.replace(/\(.*/, "").trim(); // truncates extra info such as (ft. artist) or (extended version)
     var userSong = document.getElementById('guessEntry').value;
-    console.log("Comparing your guess: " + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
 
     var similarity = checkSimilarity(expectedSong.toLowerCase(), userSong.toLowerCase());
+    console.log("Comparing your guess: " + userSong + " to " + expectedSong + " gives a similarity of " + similarity)
+
     document.getElementById("guessEntry").value = ""; //clears the text field after guess is submitted and everthing is done
 
-    if (similarity < 2) { // if user guess is mostly right
+    if (similarity < 3) { // if user guess is mostly right
         
         document.getElementById('guessResult').innerText = "Correct! This song was " + songName + "by " + artistName;
         console.log('Correct!');	
