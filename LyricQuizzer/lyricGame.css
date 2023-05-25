@@ -54,6 +54,11 @@ label {
     font-family: Tahoma;
     font-size: 18px;
     margin-top: 10px;
-     margin-right: 10px;
-     position:absolute;
+    margin-right: 10px;
+    position:absolute;
+}
+.topLeft {
+    position:absolute;
+    top:10;
+    left:10;
 }
