@@ -10,17 +10,18 @@
 </head>
 <script src="musicGame.js"></script> 
 <body onload = "loadGame()">
+    <div id="confetti-container">
         <h1 id="currentPlaylist"> Current Playlist: </h1> 
         <div id = "guessSection">
             <label for="guessEntry" class="form-label">Guess: </label>
             <input type="text" id="guessEntry" placeholder="Enter Song Name:"> 
             <input type="button" id="guessButton" onclick="submitGuess()" value="Submit Guess" style="margin-left: 4px"> 
-            <input type="button" onclick="nextSong()" value="Next Song" style="margin-left: 2px">
+            <input type="button" id="nextSong" onclick="nextSong()" value="Start" style="margin-left: 2px">
         </div>
         <input type="button" id="backButton" onclick="backToMenu()" value="Back">
         <p id="guessResult"></p>
         <p id="scoreText">Score: 0</p> 
-
+    </div>
 
 </body>
 
