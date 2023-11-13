@@ -19,15 +19,17 @@
 </head>
 <script src="../assets/main.js"></script>
 <script src="../assets/game.js"></script> 
+<script src="../game-scripts/song1.js"></script>
 
-<body class="general">
+
+<body class="general" onload = "onStart(), startTimer()">
     <section class="interface">
         <div class = "row">
             <div class = "col-4 container"> 
-                <div id = "timer">00:00</div>
+                <div id = "timer">0:00</div>
             </div>
             <div class = "col-4 container">
-                <div id = "title">
+                <div>
                     <h6>Rowboat</h6>
                 </div>
             </div>
@@ -39,41 +41,45 @@
     <section class="instrument anchored ">
         <div class = "row container">
             <div class="key">
-                <div class="circle color1" id="buttonA">
+                <div class="circle color1" id="buttonQ">
                     <i class="ri-fire-line"></i>
                     <h6>Q</h6>
                 </div>
             </div>
             <div class="key">
-                <div class="circle color2" id="buttonB">
+                <div class="circle color2" id="buttonW">
                     <i class="ri-sun-line"></i>
                     <h6>W</h6>
                 </div>
             </div>
             <div class="key">
-                <div class="circle color3" id="buttonC">
+                <div class="circle color3" id="buttonE">
                     <i class="ri-moon-line"></i>
                     <h6>E</h6>
                 </div>
             </div>
             <div class="key">
-                <div class="circle color4" id="buttonD">
+                <div class="circle color4" id="buttonI">
                     <i class="ri-plant-line"></i>
                     <h6>I</h6>
                 </div>
             </div>
             <div class="key">
-                <div class="circle color5" id="buttonE">
+                <div class="circle color5" id="buttonO">
                     <i class="ri-drop-line"></i>
                     <h6>O</h6>
                 </div>
             </div>
             <div class="key">
-                <div class="circle color6" id="buttonF">
+                <div class="circle color6" id="buttonP">
                     <i class="ri-heart-line"></i>
                     <h6>P</h6>
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="note">
+        <div id="colP">
         </div>
     </section>
 
