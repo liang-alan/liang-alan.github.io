@@ -1,0 +1,100 @@
+/******
+Color Palette
+
+--------Background Blues--------
+Primary Blue: #3498db (Button)
+Light Blue: #93c4e5 (Background)
+Dark Blue: #246c96 (Button Hover)
+
+-----------Accent Blues--------
+Nice Blue: 3e5ff3 (Up Arrow)
+Deep Blue:
+-------------------------------
+
+Grey: #95a5a6
+------------------------------
+Black: #ffffff (Text)
+******/
+@font-face {
+    font-family: 'Quicksand';
+    src: url('fonts/Quicksand.ttf') format('truetype');
+}
+/********************************************
+General
+********************************************/
+.general {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #93c4e5;
+}
+/********************************************
+Home Page
+********************************************/
+.banner{
+  background-color: #93c4e5;
+}
+
+.banner h1{
+  font-size: 48px;
+  font-weight: 1000;
+  text-align: center;
+  padding: 2%;
+  margin-bottom: 2%;
+}
+
+.banner i.up{
+  font-size: 26px;
+  font-weight: 10;
+  text-align: center;
+  padding-left : 2%;
+  padding-right: 2%;
+  padding-top: 0%;
+  padding-bottom: 2%;
+}
+
+.banner i.down{
+  font-size: 36px;
+  font-weight: 10;
+  text-align: center;
+  padding-left : 2%;
+  padding-right: 2%;
+  padding-top: 2%;
+  padding-bottom: 0%;
+}
+
+.song-selection {
+  margin-left: 3%;
+  margin-right: 3%;
+  padding: 10px;
+  /* border: 1px solid #3498db; */
+  /* border-radius: 10px; */
+  /* background-color: #95a5a6; */
+}
+
+.song-selection .container {
+  margin: 0 auto;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  padding: 10px;
+  /* border: 1px solid #3498db; */
+  border-radius: 0px;
+  /* background-color: #95a5a6; */
+}
+
+.song-selection button {
+  margin-left: 3%;
+  margin-right: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: 2px solid #246c96;
+  border-radius: 24px;
+  background-color: #3498db;
+  font-size: 110%;
+}
+
+.song-selection button:hover {
+  background-color: #246c96;
+}
+
+
