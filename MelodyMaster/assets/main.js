@@ -2,6 +2,7 @@ function handleClick(buttonId) {
     switch (buttonId) {
         case 1:
             alert("Button 1 clicked");
+            window.location.href = "songs/1Rowboat.html"
             break;
         case 2:
             alert("Button 2 clicked");

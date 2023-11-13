@@ -26,6 +26,27 @@ General
   font-family: 'Quicksand', sans-serif;
   background-color: #93c4e5;
 }
+
+.color1{
+  background-color: red;
+}
+
+.color2{
+  background-color: orangered
+}
+
+.color3{
+  background-color: goldenrod
+}
+.color4{
+  background-color: teal
+}
+.color5{
+  background-color: blueviolet
+}
+.color6{
+  background-color: magenta
+}
 /********************************************
 Home Page
 ********************************************/
@@ -73,7 +94,7 @@ Home Page
 .song-selection .container {
   margin: 0 auto;
   margin-top: 2%;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
   padding: 10px;
   /* border: 1px solid #3498db; */
   border-radius: 0px;
@@ -83,8 +104,8 @@ Home Page
 .song-selection button {
   margin-left: 3%;
   margin-right: 3%;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 2px;
+  padding-right: 2px;
   padding-top: 12px;
   padding-bottom: 12px;
   border: 2px solid #246c96;
@@ -96,5 +117,152 @@ Home Page
 .song-selection button:hover {
   background-color: #246c96;
 }
+/********************************************
+Song Page
+********************************************/
+.instrument{
+    /* border : 1px solid #000000; */
+
+  margin-left: 3%;
+  margin-right: 3%;
+  /* margin-bottom: 1%;  */
+  /* border: 1px solid #3498db; */
+  border-radius: 0px;
+  position: absolute;
+  bottom: 0;
+  width: 94%;
+  height:24%;
+  display : flex;
+  justify-content: center;
+}
+
+
+.instrument .container{
+  width: 100%;
+  /* border : 1px solid #000000; */
+  display : flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.instrument .key{
+  /* border : 1px solid #000000; */
+  /* position: relative; */
+  /* border: 1px solid #000000; */
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0%;
+  padding-left: 0%;
+
+}
+
+.instrument .container .circle h6{
+  color:#000000;
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  padding: 2%;
+  margin-bottom: 2%;
+
+}
+
+.instrument i{
+  font-weight: 100;
+  font-size: 275%;
+  color: #000000;
+}
+
+.instrument .circle {
+  width: 100%;
+  /* height: 90%; */
+  /* background-color: #3498db; */
+  border-radius: 50%;
+  border : 1px solid #000000;
+  /* margin-bottom: 0%; */
+  /* margin-right: 4%; */
+  /* margin-left: 4%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.interface{
+  /* border: 1px solid #3498db; */
+  border-radius: 0px;
+  height: 20%;
+  display : flex;
+  flex-direction: column;
+  justify-content: start;
+  background-color: #2469cb;
+}
+
+.interface h6{
+  color :#000000;
+  font-size: 200%;
+  font-weight: 900;
+  text-align: center;
+  padding: 1%;
+}
+
+.interface #timer{
+  color :#000000;
+  margin-left : 2%;
+  font-size: 150%;
+  font-weight: 500;
+  text-align: left;
+}
+.interface #score{
+  color :#000000;
+  margin-right : 2%;
+  font-size: 150%;
+  font-weight: 500;
+  text-align: right;
+}
+
+.interface .row{
+  display : inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.interface .container{
+  /* border: 1px solid #3498db; */
+}
+
+/* .lines{
+  height: 100%;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-bottom: 1%;
+  border: 1px solid #3498db;
+  border-radius: 0px;
+  position: absolute;
+  bottom: 0;
+  width: 94%;
+}
+
+.lines .container{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.lines .container .line{
+  width: 10px;
+  height: 94%;
+  background-color: #000000;
+  margin-right: 4%;
+  margin-left: 4%;
+} */
+
+
+
+
 
 
