@@ -1,4 +1,3 @@
-var beat = 0;
 
 function onStart() {
     alert("Are you ready to start?" +
@@ -7,7 +6,6 @@ function onStart() {
         "\nFor the best experience, use headphones");
     // startTimer();
 }
-
 
 const Q = "red";
 const Qdown = "#cc0000";
@@ -33,23 +31,35 @@ document.addEventListener('keydown', function (event) {
     if (event.key === 'W' || event.key === 'w') {
         // console.log('W was pressed');
         document.getElementById("buttonW").style.backgroundColor = Wdown;
+        var note = document.getElementsByClassName("note color2 circle")[0];
+        var button = document.getElementById("buttonW");
+        checkOverlap(button, note);
     }
     if (event.key === 'E' || event.key === 'e') {
         // console.log('E was pressed');
         document.getElementById("buttonE").style.backgroundColor = Edown;
+        var note = document.getElementsByClassName("note color3 circle")[0];
+        var button = document.getElementById("buttonE");
+        checkOverlap(button, note);
     }
     if (event.key === 'I' || event.key === 'i') {
         // console.log('I was pressed');
         document.getElementById("buttonI").style.backgroundColor = Idown;
+        var note = document.getElementsByClassName("note color4 circle")[0];
+        var button = document.getElementById("buttonI");
     }
     if (event.key === 'O' || event.key === 'o') {
         // console.log('O was pressed');
         document.getElementById("buttonO").style.backgroundColor = Odown;
+        var note = document.getElementsByClassName("note color5 circle")[0];
+        var button = document.getElementById("buttonO");
     }
     if (event.key === 'P' || event.key === 'p') {
         // console.log('P was pressed');
-        console.log(parseInt(document.getElementById("score").innerHTML.split(":")[1]));
         document.getElementById("buttonP").style.backgroundColor = Pdown; 
+        var note = document.getElementsByClassName("note color6 circle")[0];
+        var button = document.getElementById("buttonP");
+        
     }
 });
 

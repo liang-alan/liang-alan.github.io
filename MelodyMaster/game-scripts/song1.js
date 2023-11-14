@@ -64,7 +64,7 @@ function spawn(letter) {
     note.style.height = note.style.width;
     note.style.left = x + "px";
     note.style.top = y + "px";
-    note.style.animationDuration = "1.4s";
+    note.style.animationDuration = "1.45s";
     note.addEventListener('animationend', handleAnimationEnd); // delete the circle upon animation end
     document.getElementById("col" + letter).appendChild(note);
     console.log("spawned", letter);
@@ -73,4 +73,6 @@ function handleAnimationEnd(event) {
     // Remove the animated element from the DOM
     event.target.remove();
     console.log("remove at the end of animation and listener");
+    document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) - 1);
+
 }
