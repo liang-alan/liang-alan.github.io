@@ -65,70 +65,12 @@ function spawn(letter) {
     note.style.left = x + "px";
     note.style.top = y + "px";
     note.style.animationDuration = "1.4s";
-    note.addEventListener('animationend', handleAnimationEnd);
-    document.addEventListener('keydown', function (event) {
-        if (event.key === letter || event.key === letter.toLowerCase()) {
-            checkOverlap(button, note);
-        }
-    });
-    document.removeEventListener('keydown', function (event) {
-        if (event.key === letter || event.key === letter.toLowerCase()) {
-            checkOverlap(button, note);
-        }
-    });
+    note.addEventListener('animationend', handleAnimationEnd); // delete the circle upon animation end
     document.getElementById("col" + letter).appendChild(note);
-    // var p = document.createElement("p");
-    // var text = document.createTextNode("Hello World");
-    // p.appendChild(text);
-    // document.getElementById("game").appendChild(p);
     console.log("spawned", letter);
 }
 function handleAnimationEnd(event) {
     // Remove the animated element from the DOM
-    document.removeEventListener('keydown', function (event) {
-        if (event.key === letter || event.key === letter.toLowerCase()) {
-            checkOverlap(button, note);
-        }
-    });
     event.target.remove();
     console.log("remove at the end of animation and listener");
-}
-function checkOverlap(button, note) {
-    var noteRect = note.getBoundingClientRect();
-    var buttonRect = button.getBoundingClientRect();
-    var confidence = buttonRect.width * 0.25;
-
-    if (
-        noteRect.bottom > buttonRect.bottom - confidence &&
-        noteRect.bottom < buttonRect.bottom + confidence
-    ) {
-        console.log("Circle is on top of the button");
-        note.remove();
-        document.removeEventListener('keydown', function (event) {
-            if (event.key === letter || event.key === letter.toLowerCase()) {
-                checkOverlap(button, note);
-            }
-        });
-        document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 1);
-    } else {
-        console.log("Circle is not on top of the button");
-        // document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) - 1);
-    }
-}
-// Get the falling circle element
-var fallingCircle = document.getElementsByClassName('note color6');
-// Set the initial position of the falling circle
-var positionY = 0;
-// Set the animation speed (you can adjust this)
-var speed = 2;
-// Function to update the position of the falling circle
-function updatePosition() {
-    // Increment the Y position
-    positionY += speed;
-
-    // Apply the new position
-    fallingCircle.style.top = positionY + 'px';
-
-    // Request the next animation frame
-    requestAnimationFrame(updatePosition);
 }

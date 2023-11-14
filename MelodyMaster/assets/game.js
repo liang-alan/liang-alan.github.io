@@ -26,6 +26,9 @@ document.addEventListener('keydown', function (event) {
     if (event.key === 'Q' || event.key === 'q') {
         // console.log('Q was pressed');
         document.getElementById("buttonQ").style.backgroundColor = Qdown;
+        var note = document.getElementsByClassName("note color1 circle")[0];
+        var button = document.getElementById("buttonQ");
+        checkOverlap(button, note);
     }
     if (event.key === 'W' || event.key === 'w') {
         // console.log('W was pressed');
@@ -77,3 +80,20 @@ document.addEventListener('keyup', function (event) {
         document.getElementById("buttonP").style.backgroundColor = P;
     }
 });
+
+function checkOverlap(button, note, letter) {
+    var noteRect = note.getBoundingClientRect();
+    var buttonRect = button.getBoundingClientRect();
+    var confidence = buttonRect.width * 0.25;
+    if (
+        noteRect.bottom > buttonRect.bottom - confidence &&
+        noteRect.bottom < buttonRect.bottom + confidence
+    ) {
+        console.log("Circle is on top of the button");
+        note.remove();
+        document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 1);
+    } else {
+        console.log("Circle is not on top of the button");
+        document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) - 1);
+    }
+}
