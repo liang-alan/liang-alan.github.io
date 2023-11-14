@@ -39,16 +39,11 @@ function createNotes() {
         note.style.left = x + "px";
         note.style.top = y + "px";
         note.addEventListener('animationend', handleAnimationEnd);
-        // note.addEventListener('keydown', function (event) {
-        //     if (event.key === letter || event.key === letter.toLowerCase()) {
-        //         console.log("hello!")
-        //         if (checkOverlap(button, note)) {
-        //             note.remove();
-        //             document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 1);
-
-        //         }
-        //     }
-        // });
+        document.addEventListener('keydown', function (event) {
+            if (event.key === letter || event.key === letter.toLowerCase()) {
+                checkOverlap(button, note);
+            }
+        });
         document.getElementById("col"+letter).appendChild(note);
         // var p = document.createElement("p");
         // var text = document.createTextNode("Hello World");
@@ -59,18 +54,28 @@ function createNotes() {
     function handleAnimationEnd(event) {
         // Remove the animated element from the DOM
         event.target.remove();
+        document.removeEventListener('keydown', function (event) {
+            if (event.key === letter || event.key === letter.toLowerCase()) {
+                console.log("hello!")
+                if (checkOverlap(button, note)) {
+                    note.remove();
+                    document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 1);
+                }
+            }
+        });
     }
     function checkOverlap(button, note) {
         var noteRect = note.getBoundingClientRect();
         var buttonRect = button.getBoundingClientRect();
-        var confidence = buttonRect.width * 0.1;
+        var confidence = buttonRect.width * 0.2;
 
         if (
-            noteRect.bottom > buttonRect.bottom - confidence ||
+            noteRect.bottom > buttonRect.bottom - confidence &&
             noteRect.bottom < buttonRect.bottom + confidence
         ) {
             console.log("Circle is on top of the button");
-            noteRect.remove(); // Remove the circle if it overlaps with the button
+            note.remove();
+            document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 1);
         }
     }
 }
