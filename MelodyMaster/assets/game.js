@@ -1,6 +1,3 @@
-
-
-
 const Q = "red";
 const Qdown = "#cc0000";
 const W = "orangered";
@@ -95,7 +92,7 @@ function checkOverlap(button, note, letter) {
         return;
     }
     var buttonRect = button.getBoundingClientRect();
-    var confidence = buttonRect.width * 0.09;
+    var confidence = buttonRect.width * 0.12;
     if (noteRect.bottom > buttonRect.bottom - confidence &&noteRect.bottom < buttonRect.bottom + confidence) {
         console.log("Circle is on top of the button");
         document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 3);

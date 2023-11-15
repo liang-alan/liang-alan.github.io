@@ -37,11 +37,19 @@ function startTimer() {
 }
 async function createNotes() {
     if (beat == 5 && subbeat == 1) {
-        console.log("first note")
+        spawn("Q");
+    }
+    if (beat == 6 && subbeat == 1) {
         spawn("Q");
     }
     if (beat == 7 && subbeat == 1) {
         spawn("Q");
+    }
+    if (beat == 7 && subbeat == 4) {
+        spawn("W");
+    }
+    if (beat == 8 && subbeat == 1) {
+        spawn("E");
     }
     if (beat == 9 && subbeat == 1) {
         spawn("E");
@@ -90,7 +98,7 @@ function spawn(letter) {
     var button = document.getElementById("button" + letter);
     var x = button.getBoundingClientRect().left;
     // x += button.offsetWidth / 2;
-    var y = 0.06 * window.innerHeight;
+    var y = 0.07 * window.innerHeight;
     var note = document.createElement("div");
     switch (letter) {
         case "Q":
@@ -116,7 +124,7 @@ function spawn(letter) {
     note.style.height = note.style.width;
     note.style.left = x + "px";
     note.style.top = y + "px";
-    note.style.animationDuration = "1.45s"; 
+    note.style.animationDuration = "1.425s"; 
     note.addEventListener('animationend', handleAnimationEnd); // delete the circle upon animation end
     document.getElementById("col" + letter).appendChild(note);
     // console.log("spawned", letter);
