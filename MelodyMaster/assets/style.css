@@ -343,7 +343,7 @@ Song Page
 
 @keyframes fall {
   to {
-    transform: translateY(65vh); /* Revert to 63 */
+    transform: translateY(66vh); /* Revert to 63 */
   }
 }
 
