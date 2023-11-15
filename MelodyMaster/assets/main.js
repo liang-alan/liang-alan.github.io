@@ -1,17 +1,16 @@
 function handleClick(buttonId) {
     switch (buttonId) {
         case 1:
-            alert("Button 1 clicked");
             window.location.href = "songs/1Rowboat.html"
             break;
         case 2:
-            alert("Button 2 clicked");
+            alert("Coming Soon!");
             break;
         case 3:
-            alert("Button 3 clicked");
+            alert("Coming Soon!");
             break;
         case 4:
-            alert("Button 4 clicked");
+            alert("Coming Soon!");
             break;
         case 5:
             alert("Button 5 clicked");
