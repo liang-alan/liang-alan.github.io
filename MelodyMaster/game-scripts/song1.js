@@ -1,19 +1,27 @@
-var beat = 0;
+
+var beat = 1;
 var subbeat = 1;
 function startTimer() {
+    document.getElementsByClassName("instructions")[0].style.display = "none";
     var min = 0;
     var sec = 0;
     setInterval(function () {
-        // console.log((beat%4)+1,subbeat);
-        subbeat++;
-        if (subbeat == 5) {
-            subbeat = 1;
+        console.log(beat);
+        console.log(((beat - 1) % 4) + 1, subbeat);
+        createNotes();
+        if (beat == 2 && subbeat == 3) {
+            startAudio();
+            console.log("start audio");
+        }
+        if (subbeat == 4) {
+            subbeat = 0;
             beat++;
         }
-        createNotes();
+        subbeat++;
     }, 200); // 200ms * 4 = 800ms for 75bpm
     
     setInterval(function () {
+        sec++;  // increment seconds    
         if (sec == 60) {
             min++;
             sec = 0;
@@ -24,12 +32,12 @@ function startTimer() {
         } else {
             document.getElementById("timer").innerHTML = min + ":" + sec;
         }
-        sec++;  // increment seconds
     }, 1000);
 
 }
 async function createNotes() {
     if (beat == 5 && subbeat == 1) {
+        console.log("first note")
         spawn("Q");
     }
     if (beat == 7 && subbeat == 1) {
@@ -59,25 +67,30 @@ async function createNotes() {
     if (beat == 17 && subbeat == 1) {
         spawn("O");
     }
-    // if (beat == 17 && subbeat == 3) {
-    //     spawn("I");
-    // }
+    if (beat == 17 && subbeat == 4) {
+        spawn("I");
+    }
     if (beat == 18 && subbeat ==1) {
         spawn("E");
     }
-    // if (beat == 18 && subbeat == 3) {
-    //     spawn("W");
-    // }
-    if (beat == 19 && subbeat == 1) {
+    if (beat == 18 && subbeat == 4) {
         spawn("W");
     }
+    if (beat == 19 && subbeat == 1) {
+        spawn("Q");
+    }
+}
+
+function startAudio() {
+    var audio = document.getElementById("audio");
+    audio.play();
 }
 function spawn(letter) {
     // console.log("spawning", "button"+ letter);
     var button = document.getElementById("button" + letter);
     var x = button.getBoundingClientRect().left;
     // x += button.offsetWidth / 2;
-    var y = 0.05 * window.innerHeight;
+    var y = 0.06 * window.innerHeight;
     var note = document.createElement("div");
     switch (letter) {
         case "Q":
@@ -103,7 +116,7 @@ function spawn(letter) {
     note.style.height = note.style.width;
     note.style.left = x + "px";
     note.style.top = y + "px";
-    note.style.animationDuration = "1.55s"; // set to 1.45
+    note.style.animationDuration = "1.45s"; 
     note.addEventListener('animationend', handleAnimationEnd); // delete the circle upon animation end
     document.getElementById("col" + letter).appendChild(note);
     // console.log("spawned", letter);

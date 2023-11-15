@@ -1,11 +1,5 @@
 
-function onStart() {
-    alert("Are you ready to start?" +
-        "\nUse Q, W, E, I, O, P to play the notes." +
-        "\nWhen notes reach the corresponding button, press the key" +
-        "\nFor the best experience, use headphones");
-    // startTimer();
-}
+
 
 const Q = "red";
 const Qdown = "#cc0000";
@@ -95,9 +89,13 @@ document.addEventListener('keyup', function (event) {
 });
 
 function checkOverlap(button, note, letter) {
-    var noteRect = note.getBoundingClientRect();
+    try {
+        var noteRect = note.getBoundingClientRect();
+    } catch (TypeError) {
+        return;
+    }
     var buttonRect = button.getBoundingClientRect();
-    var confidence = buttonRect.width * 0.11;
+    var confidence = buttonRect.width * 0.09;
     if (noteRect.bottom > buttonRect.bottom - confidence &&noteRect.bottom < buttonRect.bottom + confidence) {
         console.log("Circle is on top of the button");
         document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 3);
