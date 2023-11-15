@@ -147,7 +147,7 @@ Song Page
 }
 
 .instrument .key{
-  border : 1px solid #000000;
+  /* border : 1px solid #000000; */
   /* position: relative; */
   /* border: 1px solid #000000; */
   width: 11vw;
@@ -160,7 +160,7 @@ Song Page
 }
 
 .instrument .container .circle h6{
-  color:#000000;
+  /* color:#000000; */
   font-size: 28px;
   font-weight: 800;
   text-align: center;
@@ -285,8 +285,7 @@ Song Page
 .note .circle {
   position: absolute;
   border-radius: 50%;
-  animation: fall 1.7s linear; 
-  border: 3px solid #000000;
+  border: 2px solid #000000;
 
   /* width: 10%; */
   /* border-radius: 50%; */
@@ -304,9 +303,45 @@ Song Page
   /* transform: translateX(-50%);  */
   /* border-radius: 50%; */
 }
+
+.note .falling{
+  animation: fall 1.7s linear; 
+}
+
 @keyframes fall {
   to {
     transform: translateY(68vh); /* Revert to 68 */
+  }
+}
+
+.perfect{
+  border : 0px;
+  animation: perfectAnimation 0.25s ease-out; 
+}
+
+.success{
+  border : 0px;
+  animation: successAnimation 0.25s ease-out; 
+}
+
+@keyframes perfectAnimation{
+  0% {
+    transform: scale(0.75);
+    opacity: 1.0;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0.0;
+  }
+}
+@keyframes successAnimation{
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0.0;
   }
 }
 

@@ -24,41 +24,44 @@ document.addEventListener('keydown', function (event) {
     if (event.key === 'Q' || event.key === 'q') {
         // console.log('Q was pressed');
         document.getElementById("buttonQ").style.backgroundColor = Qdown;
-        var note = document.getElementsByClassName("note color1 circle")[0];
+        var note = document.getElementsByClassName("note color1 circle falling")[0];
         var button = document.getElementById("buttonQ");
-        checkOverlap(button, note);
+        checkOverlap(button, note, "Q");
     }
     if (event.key === 'W' || event.key === 'w') {
         // console.log('W was pressed');
         document.getElementById("buttonW").style.backgroundColor = Wdown;
-        var note = document.getElementsByClassName("note color2 circle")[0];
+        var note = document.getElementsByClassName("note color2 circle falling")[0];
         var button = document.getElementById("buttonW");
-        checkOverlap(button, note);
+        checkOverlap(button, note, "W");
     }
     if (event.key === 'E' || event.key === 'e') {
         // console.log('E was pressed');
         document.getElementById("buttonE").style.backgroundColor = Edown;
-        var note = document.getElementsByClassName("note color3 circle")[0];
+        var note = document.getElementsByClassName("note color3 circle falling")[0];
         var button = document.getElementById("buttonE");
-        checkOverlap(button, note);
+        checkOverlap(button, note, "E");
     }
     if (event.key === 'I' || event.key === 'i') {
         // console.log('I was pressed');
         document.getElementById("buttonI").style.backgroundColor = Idown;
-        var note = document.getElementsByClassName("note color4 circle")[0];
+        var note = document.getElementsByClassName("note color4 circle falling")[0];
         var button = document.getElementById("buttonI");
+        checkOverlap(button, note, "I");
     }
     if (event.key === 'O' || event.key === 'o') {
         // console.log('O was pressed');
         document.getElementById("buttonO").style.backgroundColor = Odown;
-        var note = document.getElementsByClassName("note color5 circle")[0];
+        var note = document.getElementsByClassName("note color5 circle falling")[0];
         var button = document.getElementById("buttonO");
+        checkOverlap(button, note, "O");
     }
     if (event.key === 'P' || event.key === 'p') {
         // console.log('P was pressed');
         document.getElementById("buttonP").style.backgroundColor = Pdown; 
-        var note = document.getElementsByClassName("note color6 circle")[0];
+        var note = document.getElementsByClassName("note color6 circle falling")[0];
         var button = document.getElementById("buttonP");
+        checkOverlap(button, note, "P");
         
     }
 });
@@ -94,16 +97,99 @@ document.addEventListener('keyup', function (event) {
 function checkOverlap(button, note, letter) {
     var noteRect = note.getBoundingClientRect();
     var buttonRect = button.getBoundingClientRect();
-    var confidence = buttonRect.width * 0.25;
-    if (
-        noteRect.bottom > buttonRect.bottom - confidence &&
-        noteRect.bottom < buttonRect.bottom + confidence
-    ) {
+    var confidence = buttonRect.width * 0.11;
+    if (noteRect.bottom > buttonRect.bottom - confidence &&noteRect.bottom < buttonRect.bottom + confidence) {
         console.log("Circle is on top of the button");
+        document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 3);
         note.remove();
+        createPerfectAnimation(button,letter);
+        
+    } else if (noteRect.bottom > buttonRect.bottom - 2*confidence && noteRect.bottom < buttonRect.bottom + 2*confidence){
+        console.log("Circle is on top of the button");
         document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) + 1);
-    } else {
+        note.remove();
+        createSuccessAnimation(button,letter);
+    }
+    else {
         console.log("Circle is not on top of the button");
         document.getElementById("score").innerHTML = "Score:" + (parseInt(document.getElementById("score").innerHTML.split(":")[1]) - 1);
     }
+}
+
+function createPerfectAnimation(button,letter) {
+    var animation = document.createElement("div");
+    var x = button.getBoundingClientRect().left;
+    var y = button.getBoundingClientRect().top;
+    animation.style.width = button.getBoundingClientRect().width + "px";
+    animation.style.height = animation.style.width;
+    animation.style.top = button.getBoundingClientRect().top + "px";
+    animation.style.left = x + "px";
+    animation.style.top = y + "px";
+    animation.className = "perfect circle"
+    var color;
+    switch (letter) {
+        case "Q":
+            color = 'color1'
+            break;
+        case "W":
+            color = 'color2'
+            break;
+        case "E":
+            color = 'color3'
+            break;
+        case "I":
+            color = 'color4'
+            break;
+        case "O":
+            color = 'color5'
+            break;
+        case "P":
+            color = 'color6'
+            break;
+    }
+    animation.classList.add(color);
+
+    animation.addEventListener('animationend', function (event) {
+        // Remove the animated element from the DOM
+        event.target.remove();
+    }); // delete the circle upon animation end
+    document.getElementById("col" + letter).appendChild(animation);
+}
+function createSuccessAnimation(button,letter) {
+    var animation = document.createElement("div");
+    var x = button.getBoundingClientRect().left;
+    var y = button.getBoundingClientRect().top;
+    animation.style.width = button.getBoundingClientRect().width + "px";
+    animation.style.height = animation.style.width;
+    animation.style.top = button.getBoundingClientRect().top + "px";
+    animation.style.left = x + "px";
+    animation.style.top = y + "px";
+    animation.className = "success circle"
+    var color;
+    switch (letter) {
+        case "Q":
+            color = 'color1'
+            break;
+        case "W":
+            color = 'color2'
+            break;
+        case "E":
+            color = 'color3'
+            break;
+        case "I":
+            color = 'color4'
+            break;
+        case "O":
+            color = 'color5'
+            break;
+        case "P":
+            color = 'color6'
+            break;
+    }
+    animation.classList.add(color);
+    animation.addEventListener('animationend', function (event) {
+        // Remove the animated element from the DOM
+        event.target.remove();
+    }); // delete the circle upon animation end
+    document.getElementById("col" + letter).appendChild(animation);
 }
