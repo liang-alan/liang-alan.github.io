@@ -1,12 +1,13 @@
 const bpm = 75;
 const beatLength = (60 / bpm) * 1000; // in ms
 const animationDuration = 2 * beatLength; // in ms
+var baseLatency = 0;
 
 function startTimer() {
     // console.log("playing")
     document.getElementsByClassName("instructions")[0].style.display = "none";
     // Create an audio context
-    const audioContext = new window.AudioContext();
+    audioContext = new window.AudioContext();
         // Create an audio element
     const audioElement = new Audio('../assets/audio/Rowboat.mp3');
         // Create an audio source node
@@ -16,8 +17,8 @@ function startTimer() {
     source.connect(audioContext.destination);
     createNotes();
     audioElement.play(); 
-    console.log(audioContext.baseLatency);
-    console.log(audioContext.outputLatency);
+    console.log(audioContext.baseLatency, audioContext.outputLatency);
+    baseLatency = audioContext.baseLatency;
     var sec = 0;
     var min = 0;
     setInterval(function () {
@@ -93,7 +94,7 @@ function createNotes() {
 
 function toMS(measure, beat, offset) {
     var spawnTime = (measure - 1) * 4 * beatLength + (beat - 1) * beatLength + offset;
-    return spawnTime - (audioContext.baseLatency * 1000) -animationDuration;
+    return spawnTime - (baseLatency * 1000) -animationDuration;
 }
 
 function spawn(letter) {
