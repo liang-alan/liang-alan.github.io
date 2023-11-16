@@ -1,25 +1,25 @@
+const bpm = 75;
+const beatLength = (60 / bpm) * 1000; // in ms
+const animationDuration = 2 * beatLength; // in ms
 
-var beat = 1;
-var subbeat = 1;
 function startTimer() {
+    // console.log("playing")
     document.getElementsByClassName("instructions")[0].style.display = "none";
-    var min = 0;
+    // Create an audio context
+    const audioContext = new window.AudioContext();
+        // Create an audio element
+    const audioElement = new Audio('../assets/audio/Rowboat.mp3');
+        // Create an audio source node
+    const source = audioContext.createMediaElementSource(audioElement);
+
+        // Connect the source to the audio context's destination (speakers)
+    source.connect(audioContext.destination);
+    createNotes();
+    audioElement.play(); 
+    console.log(audioContext.baseLatency);
+    console.log(audioContext.outputLatency);
     var sec = 0;
-    setInterval(function () {
-        console.log(beat);
-        console.log(((beat - 1) % 4) + 1, subbeat);
-        createNotes();
-        if (beat == 2 && subbeat == 3) {
-            startAudio();
-            console.log("start audio");
-        }
-        if (subbeat == 4) {
-            subbeat = 0;
-            beat++;
-        }
-        subbeat++;
-    }, 200); // 200ms * 4 = 800ms for 75bpm
-    
+    var min = 0;
     setInterval(function () {
         sec++;  // increment seconds    
         if (sec == 60) {
@@ -35,68 +35,71 @@ function startTimer() {
     }, 1000);
 
 }
-async function createNotes() {
-    if (beat == 5 && subbeat == 1) {
-        spawn("Q");}
-    if (beat == 6 && subbeat == 1) {
-        spawn("Q");
-    }
-    if (beat == 7 && subbeat == 1) {
-        spawn("Q");
-    }
-    if (beat == 7 && subbeat == 4) {
-        spawn("W");
-    }
-    if (beat == 8 && subbeat == 1) {
-        spawn("E");
-    }
-    if (beat == 9 && subbeat == 1) {
-        spawn("E");
-    }
-    if (beat == 10 && subbeat == 1) {
-        spawn("E");
-    }
-    if (beat == 11 && subbeat == 1) {
-        spawn("I");
-    }
-    if (beat == 13 && subbeat == 1) {
-        spawn("P");
-    }
-    if (beat == 14 && subbeat == 1) {
-        spawn("I");
-    }
-    if (beat == 15 && subbeat == 1) {
-        spawn("E");
-    }
-    if (beat == 16 && subbeat == 1) {
-        spawn("Q");
-    }
-    if (beat == 17 && subbeat == 1) {
-        spawn("O");
-    }
-    if (beat == 17 && subbeat == 4) {
-        spawn("I");
-    }
-    if (beat == 18 && subbeat ==1) {
-        spawn("E");
-    }
-    if (beat == 18 && subbeat == 4) {
-        spawn("W");
-    }
-    if (beat == 19 && subbeat == 1) {
-        spawn("Q");
-    }
+function createNotes() {
+    console.log("creating notes");
+    spawn("Q");
+    setTimeout(spawn("Q"), toMS(1, 1, 0));
+
+
+    // if (beat == 6 && subbeat == 1) {
+    //     spawn("Q");
+    // }
+    // if (beat == 7 && subbeat == 1) {
+    //     spawn("Q");
+    // }
+    // if (beat == 7 && subbeat == 4) {
+    //     spawn("W");
+    // }
+    // if (beat == 8 && subbeat == 1) {
+    //     spawn("E");
+    // }
+    // if (beat == 9 && subbeat == 1) {
+    //     spawn("E");
+    // }
+    // if (beat == 10 && subbeat == 1) {
+    //     spawn("E");
+    // }
+    // if (beat == 11 && subbeat == 1) {
+    //     spawn("I");
+    // }
+    // if (beat == 13 && subbeat == 1) {
+    //     spawn("P");
+    // }
+    // if (beat == 14 && subbeat == 1) {
+    //     spawn("I");
+    // }
+    // if (beat == 15 && subbeat == 1) {
+    //     spawn("E");
+    // }
+    // if (beat == 16 && subbeat == 1) {
+    //     spawn("Q");
+    // }
+    // if (beat == 17 && subbeat == 1) {
+    //     spawn("O");
+    // }
+    // if (beat == 17 && subbeat == 4) {
+    //     spawn("I");
+    // }
+    // if (beat == 18 && subbeat ==1) {
+    //     spawn("E");
+    // }
+    // if (beat == 18 && subbeat == 4) {
+    //     spawn("W");
+    // }
+    // if (beat == 19 && subbeat == 1) {
+    //     spawn("Q");
+    // }
 }
 
-function startAudio() {
-    var audio = document.getElementById("audio");
-    audio.play();
+function toMS(measure, beat, offset) {
+    var spawnTime = (measure - 1) * 4 * beatLength + (beat - 1) * beatLength + offset;
+    return spawnTime - (audioContext.baseLatency * 1000) -animationDuration;
 }
+
 function spawn(letter) {
     // console.log("spawning", "button"+ letter);
     var button = document.getElementById("button" + letter);
     var x = button.getBoundingClientRect().left;
-    // x += button.offsetWidth / 2;
     var y = 0.0775 * window.innerHeight;
     var note = document.createElement("div");
     switch (letter) {
@@ -123,7 +126,7 @@ function spawn(letter) {
     note.style.height = note.style.width;
     note.style.left = x + "px";
     note.style.top = y + "px";
-    note.style.animationDuration = "1.4s"; 
+    note.style.animationDuration = "" + animationDuration/1000 + "s"; 
     note.addEventListener('animationend', handleAnimationEnd); // delete the circle upon animation end
     document.getElementById("col" + letter).appendChild(note);
     // console.log("spawned", letter);
