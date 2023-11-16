@@ -2,6 +2,7 @@ const bpm = 75;
 const beatLength = (60 / bpm) * 1000; // in ms
 const animationDuration = 2 * beatLength; // in ms
 var baseLatency = 0;
+var outputLatency = 0;
 
 function startTimer() {
     // console.log("playing")
@@ -15,10 +16,11 @@ function startTimer() {
 
         // Connect the source to the audio context's destination (speakers)
     source.connect(audioContext.destination);
-    createNotes();
     audioElement.play(); 
     console.log(audioContext.baseLatency, audioContext.outputLatency);
     baseLatency = audioContext.baseLatency;
+    outputLatency = audioContext.outputLatency;
+    createNotes();
     var sec = 0;
     var min = 0;
     setInterval(function () {
@@ -38,70 +40,46 @@ function startTimer() {
 }
 function createNotes() {
     console.log("creating notes");
-    spawn("Q");
-    setTimeout(spawn("Q"), toMS(1, 1, 0));
-
-
-    // if (beat == 6 && subbeat == 1) {
-    //     spawn("Q");
-    // }
-    // if (beat == 7 && subbeat == 1) {
-    //     spawn("Q");
-    // }
-    // if (beat == 7 && subbeat == 4) {
-    //     spawn("W");
-    // }
-    // if (beat == 8 && subbeat == 1) {
-    //     spawn("E");
-    // }
-    // if (beat == 9 && subbeat == 1) {
-    //     spawn("E");
-    // }
-    // if (beat == 10 && subbeat == 1) {
-    //     spawn("E");
-    // }
-    // if (beat == 11 && subbeat == 1) {
-    //     spawn("I");
-    // }
-    // if (beat == 13 && subbeat == 1) {
-    //     spawn("P");
-    // }
-    // if (beat == 14 && subbeat == 1) {
-    //     spawn("I");
-    // }
-    // if (beat == 15 && subbeat == 1) {
-    //     spawn("E");
-    // }
-    // if (beat == 16 && subbeat == 1) {
-    //     spawn("Q");
-    // }
-    // if (beat == 17 && subbeat == 1) {
-    //     spawn("O");
-    // }
-    // if (beat == 17 && subbeat == 4) {
-    //     spawn("I");
-    // }
-    // if (beat == 18 && subbeat ==1) {
-    //     spawn("E");
-    // }
-    // if (beat == 18 && subbeat == 4) {
-    //     spawn("W");
-    // }
-    // if (beat == 19 && subbeat == 1) {
-    //     spawn("Q");
-    // }
+    spawnTimer("Q", toMS(1, 1, 0));
+    spawnTimer("Q", toMS(1, 2, 0));
+    spawnTimer("Q", toMS(1, 3, 0));
+    spawnTimer("W", toMS(1, 3, 3 / 4));
+    spawnTimer("E", toMS(1, 4, 0));
+    spawnTimer("E", toMS(2, 1, 0));
+    spawnTimer("E", toMS(2, 2, 0));
+    spawnTimer("I", toMS(2, 3, 0));
+    spawnTimer("P", toMS(3, 1, 0));
+    spawnTimer("I", toMS(3, 2, 0));
+    spawnTimer("E", toMS(3, 3, 0));
+    spawnTimer("Q", toMS(3, 4, 0));
+    spawnTimer("O", toMS(4, 1, 0));
+    spawnTimer("I", toMS(4, 1, 3 / 4));
+    spawnTimer("E", toMS(4, 2, 0));
+    spawnTimer("W", toMS(4, 2, 3 / 4));
+    spawnTimer("Q", toMS(4, 3, 0));
 }
 
 function toMS(measure, beat, offset) {
-    var spawnTime = (measure - 1) * 4 * beatLength + (beat - 1) * beatLength + offset;
-    return spawnTime - (baseLatency * 1000) -animationDuration;
+    var spawnTime = 4 * (measure) * beatLength + // no minus one because of the 4 beat intro
+        (beat - 1) * beatLength +
+        offset * (beatLength);
+    console.log("spawn time:", spawnTime, ",base latency:", baseLatency * 1000, ",animation duration:", animationDuration, ",output latency:", outputLatency * 1000);
+    return spawnTime - animationDuration  + (baseLatency * 1000);
+}
+
+function spawnTimer(letter, spawnTime) {
+    // console.log(animationDuration);
+    console.log("spawning", "button"+ letter, "at", spawnTime)
+    setTimeout(function () {
+        spawn(letter);
+    }, spawnTime);
 }
 
 function spawn(letter) {
     // console.log("spawning", "button"+ letter);
     var button = document.getElementById("button" + letter);
     var x = button.getBoundingClientRect().left;
-    var y = 0.0775 * window.innerHeight;
+    var y = 0.0675 * window.innerHeight;
     var note = document.createElement("div");
     switch (letter) {
         case "Q":
@@ -127,7 +105,8 @@ function spawn(letter) {
     note.style.height = note.style.width;
     note.style.left = x + "px";
     note.style.top = y + "px";
-    note.style.animationDuration = "" + animationDuration/1000 + "s"; 
+    note.style.animationDuration = (animationDuration / 1000) +0.05 + "s"; 
+    console.log("animation duration:", note.style.animationDuration);
     note.addEventListener('animationend', handleAnimationEnd); // delete the circle upon animation end
     document.getElementById("col" + letter).appendChild(note);
     // console.log("spawned", letter);
