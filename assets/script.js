@@ -25,3 +25,14 @@ function switchPage(name) {
     // Change the URL to the desired page
     window.location.href = name + '.html';
 }
+
+// Clear input fields and textareas on page load
+window.addEventListener('load', function () {
+    // Select input fields and textareas
+    var inputs = document.querySelectorAll('input, textarea');
+
+    // Loop through and set the value to an empty string
+    inputs.forEach(function (input) {
+        input.value = '';
+    });
+});
