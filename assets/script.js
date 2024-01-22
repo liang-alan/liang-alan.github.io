@@ -26,6 +26,10 @@ function switchPage(name) {
     window.location.href = name + '.html';
 }
 
+function newTab(url) {
+    window.open(url, '_blank');
+}
+
 // Clear input fields and textareas on page load
 window.addEventListener('load', function () {
     // Select input fields and textareas
