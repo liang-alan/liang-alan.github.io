@@ -1,13 +1,4 @@
 /**
-* Template Name: Mentor
-* Updated: May 30 2023 with Bootstrap v5.3.0
-* Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-
-/**
 * Color Palette:
 *   Primary: 
         #FBE8A6 (Light Yellow)
@@ -45,14 +36,40 @@ h6 {
   font-family: "Montserrat", sans-serif;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+.btn-primary, .btn-primary:active, .btn-primary:visited {
     margin-top: 1vh;
     background-color: #303C6C !important;
+}
+.btn-primary:hover{
+    background-color: #F4976C !important;
+}
+
+#back-to-top {
+    opacity: 0; /* Initially make the button invisible */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #303C6C;
+    color: #FBE8A6;
+    border: #303C6C solid 2px;
+    border-radius: 50px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1;
+    transition: opacity 0.45s ease-out; /* CSS transition for fading effect */
+    pointer-events: none; /* Make the button unclickable initially */
+
+
+}
+
+#back-to-top:hover {
+    background-color: #F4976C;
 }
 
 
 .blank{
-    height: 12vh;
+    height: 13vh;
 }
 /*--------------------------------------------------------------
 # Header & Navbar
@@ -196,7 +213,7 @@ main .line-break{
 }
 
 main p{
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 300;
     text-align: justify;
 }
@@ -222,7 +239,7 @@ main object embed{
 
 main h4{
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 450;
     margin-bottom: 1vh;
 }
 main h6{
@@ -232,16 +249,15 @@ main h6{
 }
 
 main form label{
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 1vh;
+    font-size: 1.0rem;
+    font-weight: 550;
+    margin-bottom: 0.5vh;
 }
 
 main form input{
     width: 100%;
     height: 6vh;
-    margin-top:2vh;
-    margin-bottom: 2vh;
+    margin-bottom: 1vh;
     border: 1px solid #303C6C;
     border-radius: 10px;
     padding-left: 1vw;
@@ -250,11 +266,26 @@ main form input{
 main form textarea{
     width: 100%;
     height: 25vh;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+    margin-bottom: 1vh;
     border: 1px solid #303C6C;
     border-radius: 10px;
     padding-left: 1vw;
+}
+
+main li {
+    font-size: 1.35rem;
+    font-weight: 300;
+    margin-bottom: 0.5vh;
+
+}
+
+/*--------------------------------------------------------------
+Project
+--------------------------------------------------------------*/
+@media (max-width: 768px) {
+    main .container .row{
+        margin-bottom: 2vh;
+    }
 }
 
 /*--------------------------------------------------------------

@@ -36,3 +36,22 @@ window.addEventListener('load', function () {
         input.value = '';
     });
 });
+
+window.addEventListener('scroll', function () {
+    var button = document.getElementById('back-to-top');
+    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        // button.style.display = 'block';
+        button.style.opacity = '1';
+        button.style.pointerEvents = 'auto'; // clickable
+    } else {
+        // button.style.display = 'none';
+        button.style.opacity = '0';
+        button.style.pointerEvents = 'none'; //  unclickable
+    }
+});
+
+
+function scrollToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
