@@ -105,7 +105,8 @@ function spawn(letter) {
     note.style.height = note.style.width;
     note.style.left = x + "px";
     note.style.top = y + "px";
-    note.style.animationDuration = (animationDuration / 1000) +0.21 + "s"; 
+    note.style.animationDuration = (animationDuration / 1000) + 0.075* (animationDuration / 1000)+ "s"; 
+    
     console.log("animation duration:", note.style.animationDuration);
     note.addEventListener('animationend', handleAnimationEnd); // delete the circle upon animation end
     document.getElementById("col" + letter).appendChild(note);
