@@ -59,3 +59,39 @@ function scrollToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+function showEssay() {
+    var select = document.getElementById('essay-select');
+    var viewer = document.getElementById('essay-viewer');
+    var selectedEssay = select.value;
+
+    // Nothing selected
+    if (selectedEssay === "") return;
+
+
+    // Remove any existing embed
+    viewer.innerHTML = '';
+
+    // Create new embed element
+    var embed = document.createElement('embed');
+    embed.src = selectedEssay;
+    embed.type = 'application/pdf';
+    embed.width = '100%';
+    embed.height = '800px';
+
+    viewer.appendChild(embed);
+
+    // Update the URL with the selected essay (using hash)
+    window.location.hash = encodeURIComponent(selectedEssay);
+}
+
+// On page load, check if there's a hash and show the essay
+window.addEventListener('DOMContentLoaded', function () {
+    var hash = window.location.hash.slice(1);
+    if (hash) {
+        var select = document.getElementById('essay-select');
+        var decoded = decodeURIComponent(hash);
+        select.value = decoded;
+        showEssay();
+    }
+});

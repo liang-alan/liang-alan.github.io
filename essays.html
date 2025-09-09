@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Alan Liang</title>
+    <title>Essays | Alan Liang</title>
     <meta name="Author" content="Alan Liang">
 
     <!-- Bootstrap -->
@@ -34,56 +33,29 @@
                 <a href="essays.html">Essays</a>
                 <a href="contact.html">Contact Me</a>
                 <a href="resume.html">Resume</a>
-
             </nav><!-- .navbar -->
         </div>
     </header>
     <!-- End Header -->
 
-    <!-- HERO SECTION-->
-    <section id="hero" class="d-flex justify-content-center align-items-center fade-up">
-        <div class="container position-relative">
-            <h2>This is</h2>
-            <h1>Alan Liang</h1>
-        </div>
-    </section><!-- End Hero -->
-
-    <!-- MAIN SECTION -->
+    <!-- Essay SECTION -->
     <button id="back-to-top" onclick="scrollToTop()">
         <i class="ri-arrow-up-line"></i>
     </button>
     <main>
-        <div class="container fade-up">
-            <h1>A bit about me</h1>
-            <div class="line-break"></div>
-            <div class="row">
-                <div class="col-9">
-                    <p> I am a undergraduate student at the University of Wisconsin-Madison pursuing majors
-                        in <strong>Computer Science</strong> and <strong>Enviornmental Studies</strong> with certificates in
-                        Data Science and Game Design. I am excited to learn new skills and apply them to
-                        tackle world problems. I'm passionate about <strong>fullstack development</strong>, <strong>AI governance</strong>, and environmental justice.
-                        Let's connect and explore the different potentials of technology within our society!
-                    </p>
-                    <div>
-                        <button onclick="switchPage('about')" class="btn btn-primary">Learn More</button>
-                    </div>
-                    <br>
-                    <div>
-                        <button onclick="switchPage('essays')" class="btn btn-secondary">Read My Essays</button>
-                    </div>
-                    <div class="line-break"></div>
-                    <p>
-                        Website last updated: 9/9/2025
-                    </p>
-                    </div>
-                <div class="col-3 fade-left">
-                    <img src="assets/img/profile-pic.jpg" alt="Alan Liang">
-                </div>
-            </div>  
-            
+        <div class="blank"></div>
+        <h1>My Essays</h1>
+        <div class="mb-1">
+            <select id="essay-select" class="form-select" onchange="showEssay()">
+            <option value="assets/essays/computer_science_culture.pdf">Reflection on Computer Science Culture among students</option>
+            <option value="">More Coming Soon...</option>
+            </select>
         </div>
-    </main>
-    <!--End Main-->
+        <object id="essay-viewer">
+            <embed src="assets/essays/computer_science_culture.pdf" type="application/pdf" width="100%" height="800px" />    
+        </object>
+        </main>
+    <!--Essay Section End-->
     <footer id="footer">
         <div class="container">
             <div class="row">
